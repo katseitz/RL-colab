@@ -195,17 +195,17 @@
       <CodeComponent name="good_side_code" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="good_side = &quot;right&quot;&amp;#10;counter = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="good_side = &quot;right&quot;;&amp;#10;counter = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((counter === 5)) {&amp;#10;    if ((good_side === &quot;right&quot;)) {&amp;#10;        good_side = &quot;left&quot;;&amp;#10;    } else {&amp;#10;        if ((good_side === &quot;left&quot;)) {&amp;#10;            good_side = &quot;right&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;    counter = 0;&amp;#10;}&amp;#10;counter = (counter + 1);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if(counter == 5):&amp;#10;    if good_side == &quot;right&quot;:&amp;#10;        good_side = &quot;left&quot;&amp;#10;    elif good_side == &quot;left&quot;:&amp;#10;        good_side = &quot;right&quot;&amp;#10;    counter = 0&amp;#10;counter = counter + 1&amp;#10;    &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="good_side = &quot;right&quot;&amp;#10;#counter = 0&amp;#10;num_correct = 0&amp;#10;num_switch = 0&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="good_side = &quot;right&quot;;&amp;#10;num_correct = 0;&amp;#10;num_switch = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="/*&amp;#10;if(counter == 5):&amp;#10;if good_side == &quot;right&quot;:&amp;#10;good_side = &quot;left&quot;&amp;#10;elif good_side == &quot;left&quot;:&amp;#10;good_side = &quot;right&quot;&amp;#10;counter = 0&amp;#10;counter = counter + 1*/&amp;#10;if ((num_correct === num_switch_list[num_switch])) {&amp;#10;    if ((good_side === &quot;right&quot;)) {&amp;#10;        good_side = &quot;left&quot;;&amp;#10;    } else {&amp;#10;        if ((good_side === &quot;left&quot;)) {&amp;#10;            good_side = &quot;right&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;    num_correct = 0;&amp;#10;    num_switch = (num_switch + 1);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="'''&amp;#10;if(counter == 5):&amp;#10;    if good_side == &quot;right&quot;:&amp;#10;        good_side = &quot;left&quot;&amp;#10;    elif good_side == &quot;left&quot;:&amp;#10;        good_side = &quot;right&quot;&amp;#10;    counter = 0&amp;#10;counter = counter + 1&amp;#10;'''&amp;#10;&amp;#10;#if the participant has the right number of&amp;#10;#correct guesses&amp;#10;if num_correct == num_switch_list[num_switch]:&amp;#10;    if good_side == &quot;right&quot;:&amp;#10;        good_side = &quot;left&quot;&amp;#10;    elif good_side == &quot;left&quot;:&amp;#10;        good_side = &quot;right&quot;&amp;#10;    num_correct = 0&amp;#10;    num_switch = num_switch + 1 # we move one switch forward&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="if (((cue_resp.keys === &quot;1&quot;) &amp;&amp; (good_side === &quot;left&quot;))) {&amp;#10;    num_correct = (num_correct + 1);&amp;#10;}&amp;#10;if (((cue_resp.keys === &quot;2&quot;) &amp;&amp; (good_side === &quot;right&quot;))) {&amp;#10;    num_correct = (num_correct + 1);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="#Check if these need to be reward or just right&amp;#10;# I'm guessing rewarded&amp;#10;if(cue_resp.keys == '1' and good_side == &quot;left&quot;):&amp;#10;    num_correct = num_correct + 1&amp;#10;    &amp;#10;if(cue_resp.keys == '2' and good_side == &quot;right&quot;):&amp;#10;    num_correct = num_correct + 1" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="good_side_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -348,8 +348,8 @@
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
     </Routine>
-    <Routine name="getReady">
-      <RoutineSettingsComponent name="getReady" plugin="None">
+    <Routine name="get_ready">
+      <RoutineSettingsComponent name="get_ready" plugin="None">
         <Param val="none" valType="str" updates="None" name="backgroundFit"/>
         <Param val="" valType="str" updates="None" name="backgroundImg"/>
         <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
@@ -358,7 +358,7 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
-        <Param val="getReady" valType="code" updates="None" name="name"/>
+        <Param val="get_ready" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
@@ -429,10 +429,27 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="probability_sequence_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
+      <CodeComponent name="define_switches_code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="#number correct for the switch occurs&amp;#10;num_switch_list = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]#[7,8,9,10,11,12]&amp;#10;#now shuffle the list&amp;#10;random.shuffle(num_switch_list)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="num_switch_list = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];&amp;#10;Math.random.shuffle(num_switch_list);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="define_switches_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
   </Routines>
   <Flow>
-    <Routine name="getReady"/>
+    <Routine name="get_ready"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Fri Feb 28 15:54:53 2025
+    on Fri Feb 28 16:56:56 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -126,7 +126,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/katharinaseitz/Desktop/RL_colab/reinforcement_learning_volatility_lastrun.py',
+        originPath='/Users/katharinaseitz/Documents/projects/RL-colab/reinforcement_learning_volatility_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -373,7 +373,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # Start Code - component code to be run after the window creation
     
-    # --- Initialize components for Routine "getReady" ---
+    # --- Initialize components for Routine "get_ready" ---
     get_ready_text = visual.TextStim(win=win, name='get_ready_text',
         text='Get Ready!',
         font='Arial',
@@ -403,6 +403,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     with open('test.csv', 'w', newline='') as myfile:
          wr = csv.writer(myfile)
          wr.writerow(sequence)
+    # Run 'Begin Experiment' code from define_switches_code
+    #number correct for the switch occurs
+    num_switch_list = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]#[7,8,9,10,11,12]
+    #now shuffle the list
+    random.shuffle(num_switch_list)
     
     # --- Initialize components for Routine "cue" ---
     left_box = visual.ImageStim(
@@ -424,7 +429,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     cue_resp = keyboard.Keyboard(deviceName='cue_resp')
     # Run 'Begin Experiment' code from good_side_code
     good_side = "right"
-    counter = 0
+    #counter = 0
+    num_correct = 0
+    num_switch = 0
+    
     
     # --- Initialize components for Routine "outcome" ---
     outcome_left_box = visual.ImageStim(
@@ -449,7 +457,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         text='+',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
+        color='black', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     
@@ -481,28 +489,28 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         format='%Y-%m-%d %Hh%M.%S.%f %z', fractionalSecondDigits=6
     )
     
-    # --- Prepare to start Routine "getReady" ---
-    # create an object to store info about Routine getReady
-    getReady = data.Routine(
-        name='getReady',
+    # --- Prepare to start Routine "get_ready" ---
+    # create an object to store info about Routine get_ready
+    get_ready = data.Routine(
+        name='get_ready',
         components=[get_ready_text, advance_press],
     )
-    getReady.status = NOT_STARTED
+    get_ready.status = NOT_STARTED
     continueRoutine = True
     # update component parameters for each repeat
     # create starting attributes for advance_press
     advance_press.keys = []
     advance_press.rt = []
     _advance_press_allKeys = []
-    # store start times for getReady
-    getReady.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-    getReady.tStart = globalClock.getTime(format='float')
-    getReady.status = STARTED
-    thisExp.addData('getReady.started', getReady.tStart)
-    getReady.maxDuration = None
+    # store start times for get_ready
+    get_ready.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    get_ready.tStart = globalClock.getTime(format='float')
+    get_ready.status = STARTED
+    thisExp.addData('get_ready.started', get_ready.tStart)
+    get_ready.maxDuration = None
     # keep track of which components have finished
-    getReadyComponents = getReady.components
-    for thisComponent in getReady.components:
+    get_readyComponents = get_ready.components
+    for thisComponent in get_ready.components:
         thisComponent.tStart = None
         thisComponent.tStop = None
         thisComponent.tStartRefresh = None
@@ -514,8 +522,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     _timeToFirstFrame = win.getFutureFlipTime(clock="now")
     frameN = -1
     
-    # --- Run Routine "getReady" ---
-    getReady.forceEnded = routineForceEnded = not continueRoutine
+    # --- Run Routine "get_ready" ---
+    get_ready.forceEnded = routineForceEnded = not continueRoutine
     while continueRoutine:
         # get current time
         t = routineTimer.getTime()
@@ -591,10 +599,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
-            getReady.forceEnded = routineForceEnded = True
+            get_ready.forceEnded = routineForceEnded = True
             break
         continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in getReady.components:
+        for thisComponent in get_ready.components:
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
@@ -603,14 +611,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
     
-    # --- Ending Routine "getReady" ---
-    for thisComponent in getReady.components:
+    # --- Ending Routine "get_ready" ---
+    for thisComponent in get_ready.components:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # store stop times for getReady
-    getReady.tStop = globalClock.getTime(format='float')
-    getReady.tStopRefresh = tThisFlipGlobal
-    thisExp.addData('getReady.stopped', getReady.tStop)
+    # store stop times for get_ready
+    get_ready.tStop = globalClock.getTime(format='float')
+    get_ready.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('get_ready.stopped', get_ready.tStop)
     # check responses
     if advance_press.keys in ['', [], None]:  # No response was made
         advance_press.keys = None
@@ -619,7 +627,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisExp.addData('advance_press.rt', advance_press.rt)
         thisExp.addData('advance_press.duration', advance_press.duration)
     thisExp.nextEntry()
-    # the Routine "getReady" was not non-slip safe, so reset the non-slip timer
+    # the Routine "get_ready" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
     # set up handler to look after randomisation of conditions etc
@@ -667,6 +675,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cue_resp.rt = []
         _cue_resp_allKeys = []
         # Run 'Begin Routine' code from good_side_code
+        '''
         if(counter == 5):
             if good_side == "right":
                 good_side = "left"
@@ -674,7 +683,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 good_side = "right"
             counter = 0
         counter = counter + 1
-            
+        '''
+        
+        #if the participant has the right number of
+        #correct guesses
+        if num_correct == num_switch_list[num_switch]:
+            if good_side == "right":
+                good_side = "left"
+            elif good_side == "left":
+                good_side = "right"
+            num_correct = 0
+            num_switch = num_switch + 1 # we move one switch forward
         
         # store start times for cue
         cue.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
@@ -875,6 +894,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if cue_resp.keys != None:  # we had a response
             trials.addData('cue_resp.rt', cue_resp.rt)
             trials.addData('cue_resp.duration', cue_resp.duration)
+        # Run 'End Routine' code from good_side_code
+        #Check if these need to be reward or just right
+        # I'm guessing rewarded
+        if(cue_resp.keys == '1' and good_side == "left"):
+            num_correct = num_correct + 1
+            
+        if(cue_resp.keys == '2' and good_side == "right"):
+            num_correct = num_correct + 1
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if cue.maxDurationReached:
             routineTimer.addTime(-cue.maxDuration)
