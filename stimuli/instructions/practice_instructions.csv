@@ -1,0 +1,6 @@
+﻿instructions,images
+GAME OF COINS\n\nTry to collect all the coins!,none
+"The coins are hidden in magical boxes, like this one:\n\n",box.png
+Can you open the box to see if it has a coin?\n\nPress the A button to open the box!\n\n,box.png
+Can you open the box to see if it has a coin?\n\nPress the A button to open the box!\n\n,box_coin.png
+This box is magical! It contains a coin.\n\n,box_coin.png
