@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Fri Feb 28 16:56:56 2025
+    on Sun Mar  2 16:52:27 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -675,16 +675,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cue_resp.rt = []
         _cue_resp_allKeys = []
         # Run 'Begin Routine' code from good_side_code
-        '''
-        if(counter == 5):
-            if good_side == "right":
-                good_side = "left"
-            elif good_side == "left":
-                good_side = "right"
-            counter = 0
-        counter = counter + 1
-        '''
-        
         #if the participant has the right number of
         #correct guesses
         if num_correct == num_switch_list[num_switch]:
@@ -694,6 +684,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 good_side = "right"
             num_correct = 0
             num_switch = num_switch + 1 # we move one switch forward
+            
+            
+        #if good_side has switched, make first correct choice
+        #a gold coin
+        
+        
         
         # store start times for cue
         cue.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
@@ -840,6 +836,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         cue_resp.corr = 1
                     else:
                         cue_resp.corr = 0
+            # Run 'Each Frame' code from good_side_code
+            #if good_side has switched and they pick the good side 
+            #for the first time, make first correct choice
+            #a gold coin
+            
+            if(num_correct == 0 and sequence[trials.thisN] == 0 and ((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))):
+                sequence[trials.thisN] = 1
+                #double check this logic:
+                next_1 = sequence.index(1, trials.thisN)
+                sequence[next_1] = 0
+                
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -897,10 +904,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # Run 'End Routine' code from good_side_code
         #Check if these need to be reward or just right
         # I'm guessing rewarded
-        if(cue_resp.keys == '1' and good_side == "left"):
+        if(cue_resp.keys == '1' and good_side == "left" and sequence[trials.thisN] == 1):
             num_correct = num_correct + 1
             
-        if(cue_resp.keys == '2' and good_side == "right"):
+        if(cue_resp.keys == '2' and good_side == "right" and sequence[trials.thisN] == 1):
             num_correct = num_correct + 1
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if cue.maxDurationReached:
