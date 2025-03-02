@@ -1,3 +1,11 @@
+# ignore all data files
+*.log
+*.psydat
+*.csv
+data/
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

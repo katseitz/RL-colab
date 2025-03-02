@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Sun Mar  2 16:52:27 2025
+    on Sun Mar  2 16:59:32 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -909,6 +909,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             
         if(cue_resp.keys == '2' and good_side == "right" and sequence[trials.thisN] == 1):
             num_correct = num_correct + 1
+            
+            
+        thisExp.addData('good_side', good_side)
+        thisExp.addData('cue_resp.keys', cue_resp.keys)
+        thisExp.addData('probability_sequence_value', sequence[trials.thisN])
+        thisExp.addData('num_correct', num_correct)
+        thisExp.addData('num_switch', num_switch)
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if cue.maxDurationReached:
             routineTimer.addTime(-cue.maxDuration)
@@ -1088,6 +1095,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         outcome.tStop = globalClock.getTime(format='float')
         outcome.tStopRefresh = tThisFlipGlobal
         thisExp.addData('outcome.stopped', outcome.tStop)
+        # Run 'End Routine' code from box_selection_code
+        if cue_resp.keys=='1':
+            thisExp.addData('outcome_image', left_image)
+        elif cue_resp.keys=='2':
+            thisExp.addData('outcome_image', right_image)
+        else:
+            thisExp.addData('outcome_image', "no selection made")
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if outcome.maxDurationReached:
             routineTimer.addTime(-outcome.maxDuration)
