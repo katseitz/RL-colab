@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Sun Mar  2 16:59:32 2025
+    on Sun Mar  2 18:44:13 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -386,6 +386,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     import random
     import csv
     sequence = []
+    exp_correct = 0 #number of correct choices made in the experiment
+    
     
     #TODO: pull this from experiment variables.
     number_of_trials = 150
@@ -430,7 +432,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # Run 'Begin Experiment' code from good_side_code
     good_side = "right"
     #counter = 0
-    num_correct = 0
+    num_rewarded = 0
     num_switch = 0
     
     
@@ -677,12 +679,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # Run 'Begin Routine' code from good_side_code
         #if the participant has the right number of
         #correct guesses
-        if num_correct == num_switch_list[num_switch]:
+        if num_rewarded == num_switch_list[num_switch]:
             if good_side == "right":
                 good_side = "left"
             elif good_side == "left":
                 good_side = "right"
-            num_correct = 0
+            num_rewarded = 0
             num_switch = num_switch + 1 # we move one switch forward
             
             
@@ -841,8 +843,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             #for the first time, make first correct choice
             #a gold coin
             
-            if(num_correct == 0 and sequence[trials.thisN] == 0 and ((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))):
-                sequence[trials.thisN] = 1
+            if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))):
+                sequence[exp_correct] = 1
                 #double check this logic:
                 next_1 = sequence.index(1, trials.thisN)
                 sequence[next_1] = 0
@@ -904,18 +906,24 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # Run 'End Routine' code from good_side_code
         #Check if these need to be reward or just right
         # I'm guessing rewarded
-        if(cue_resp.keys == '1' and good_side == "left" and sequence[trials.thisN] == 1):
-            num_correct = num_correct + 1
+        if(cue_resp.keys == '1' and good_side == "left"): 
+            if(sequence[exp_correct] == 1):
+                num_rewarded = num_rewarded + 1
+            exp_correct = exp_correct + 1 
+        
             
-        if(cue_resp.keys == '2' and good_side == "right" and sequence[trials.thisN] == 1):
-            num_correct = num_correct + 1
+        if(cue_resp.keys == '2' and good_side == "right"):
+            if(sequence[exp_correct] == 1):
+                num_rewarded = num_rewarded + 1
+            exp_correct = exp_correct + 1
             
             
         thisExp.addData('good_side', good_side)
         thisExp.addData('cue_resp.keys', cue_resp.keys)
         thisExp.addData('probability_sequence_value', sequence[trials.thisN])
-        thisExp.addData('num_correct', num_correct)
+        thisExp.addData('num_rewarded', num_rewarded)
         thisExp.addData('num_switch', num_switch)
+        thisExp.addData('total_correct', exp_correct)
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if cue.maxDurationReached:
             routineTimer.addTime(-cue.maxDuration)
@@ -938,16 +946,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         right_image = 'stimuli/box.png'
         left_image = 'stimuli/box.png'
         #if right press
-        if cue_resp.keys=='1': # compare probabilities to list and decide whether we reward
-            #right_image = 'stimuli/box_coin.png'
-            if sequence[trials.thisN] == 1 and good_side == "left":
+        if cue_resp.keys=='1': 
+            #look back one since exp_correct has been incremented
+            if sequence[exp_correct - 1] == 1 and good_side == "left":
                 left_image = 'stimuli/box_coin.png'
             else:
                 left_image = 'stimuli/box_empty.png'
         #if left press
         # load in images of either coin box or empty box conditionally
         elif cue_resp.keys=='2': #same as above
-            if sequence[trials.thisN] == 1 and good_side == "right":
+            #look back one since exp_correct has been incremented
+            if sequence[exp_correct -1 ] == 1 and good_side == "right":
                 right_image = 'stimuli/box_coin.png'
             else:
                 right_image = 'stimuli/box_empty.png'
