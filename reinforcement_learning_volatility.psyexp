@@ -180,16 +180,16 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="selection_made = false;&amp;#10;selectionIndicator = new visual.Polygon(psychoJS.window, {&quot;edges&quot;: 4, &quot;ori&quot;: 45, &quot;radius&quot;: 195, &quot;name&quot;: &quot;selectionIndicator&quot;, &quot;lineColor&quot;: &quot;white&quot;, &quot;fillColor&quot;: null, &quot;units&quot;: &quot;pix&quot;, &quot;lineWidth&quot;: 2, &quot;interpolate&quot;: true});&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="selection_made = False&amp;#10;&amp;#10;&amp;#10;selectionIndicator = visual.Polygon(win, edges =4, ori=45, radius=195, &amp;#10;                                    name = 'selectionIndicator', &amp;#10;                                    lineColor = 'white', fillColor=None,&amp;#10;                                    units ='pix', lineWidth=2, interpolate=True)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="selection_made = false;&amp;#10;selectionIndicator = new visual.Rect({&quot;win&quot;: psychoJS.window, &quot;name&quot;: &quot;polygon&quot;, &quot;width&quot;: [0.5, 0.5][0], &quot;height&quot;: [0.5, 0.5][1], &quot;ori&quot;: 0.0, &quot;draggable&quot;: false, &quot;anchor&quot;: &quot;center&quot;, &quot;lineWidth&quot;: 4.0, &quot;colorSpace&quot;: &quot;rgb&quot;, &quot;lineColor&quot;: &quot;black&quot;, &quot;fillColor&quot;: null, &quot;depth&quot;: (- 4.0), &quot;interpolate&quot;: true, &quot;autoDraw&quot;: false});&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="selection_made = False&amp;#10;&amp;#10;selectionIndicator = visual.Rect(&amp;#10;        win=win, name='polygon',&amp;#10;        width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],&amp;#10;        ori=0.0, draggable=False, anchor='center',&amp;#10;        lineWidth=4.0,&amp;#10;        colorSpace='rgb', lineColor='black', fillColor=None,&amp;#10;        depth=-4.0, interpolate=True, &amp;#10;        autoDraw = False)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="position = None&amp;#10;if((not cue_resp.keys == None) and selection_made == False):&amp;#10;    if cue_resp.keys == '1': &amp;#10;        position = (-0.3, -0.1)&amp;#10;    elif cue_resp.keys == '2':&amp;#10;        position = (0.3, -0.1)&amp;#10;    selection_made = True&amp;#10;    selectionIndicator.pos(position)&amp;#10;    selectionIndicator.setAutoDraw(True)&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="position = null;&amp;#10;if (((! (cue_resp.keys === null)) &amp;&amp; (selection_made === false))) {&amp;#10;    if ((cue_resp.keys === &quot;1&quot;)) {&amp;#10;        position = [(- 0.3), (- 0.1)];&amp;#10;    } else {&amp;#10;        if ((cue_resp.keys === &quot;2&quot;)) {&amp;#10;            position = [0.3, (- 0.1)];&amp;#10;        }&amp;#10;    }&amp;#10;    selection_made = true;&amp;#10;    selectionIndicator.pos(position);&amp;#10;    selectionIndicator.setAutoDraw(true);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="position = None&amp;#10;if cue_resp.keys == '1': &amp;#10;    position = (-0.3, -0.1)&amp;#10;    selectionIndicator.setPos(position)&amp;#10;    selectionIndicator.setAutoDraw(True)&amp;#10;elif cue_resp.keys == '2':&amp;#10;    position = (0.3, -0.1)&amp;#10;    selectionIndicator.setPos(position)&amp;#10;    selectionIndicator.setAutoDraw(True)&amp;#10;selection_made = True&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="position = null;&amp;#10;if ((cue_resp.keys === &quot;1&quot;)) {&amp;#10;    position = [(- 0.3), (- 0.1)];&amp;#10;    selectionIndicator.setPos(position);&amp;#10;    selectionIndicator.setAutoDraw(true);&amp;#10;} else {&amp;#10;    if ((cue_resp.keys === &quot;2&quot;)) {&amp;#10;        position = [0.3, (- 0.1)];&amp;#10;        selectionIndicator.setPos(position);&amp;#10;        selectionIndicator.setAutoDraw(true);&amp;#10;    }&amp;#10;}&amp;#10;selection_made = true;&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="selection_made = false;&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="selection_made = False" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="selection_made = false;&amp;#10;selectionIndicator.setAutoDraw(false);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="selection_made = False&amp;#10;selectionIndicator.setAutoDraw(False)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="selection_indicator" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <CodeComponent name="good_side_code" plugin="None">
@@ -449,6 +449,17 @@
     </Routine>
   </Routines>
   <Flow>
+    <LoopInitiator loopType="TrialHandler" name="runs">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="3" valType="num"/>
+      <Param name="name" updates="None" val="runs" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
     <Routine name="get_ready"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
@@ -465,5 +476,6 @@
     <Routine name="outcome"/>
     <Routine name="fixation"/>
     <LoopTerminator name="trials"/>
+    <LoopTerminator name="runs"/>
   </Flow>
 </PsychoPy2experiment>

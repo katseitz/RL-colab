@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Sun Mar  2 18:44:13 2025
+    on Mon Mar  3 16:12:10 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -676,6 +676,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cue_resp.keys = []
         cue_resp.rt = []
         _cue_resp_allKeys = []
+        # Run 'Begin Routine' code from selection_indicator
+        selection_made = False
+        
+        selectionIndicator = visual.Rect(
+                win=win, name='polygon',
+                width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],
+                ori=0.0, draggable=False, anchor='center',
+                lineWidth=4.0,
+                colorSpace='rgb', lineColor='black', fillColor=None,
+                depth=-4.0, interpolate=True, 
+                autoDraw = False)
+        
         # Run 'Begin Routine' code from good_side_code
         #if the participant has the right number of
         #correct guesses
@@ -838,6 +850,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         cue_resp.corr = 1
                     else:
                         cue_resp.corr = 0
+            # Run 'Each Frame' code from selection_indicator
+            position = None
+            if cue_resp.keys == '1': 
+                position = (-0.3, -0.1)
+                selectionIndicator.setPos(position)
+                selectionIndicator.setAutoDraw(True)
+            elif cue_resp.keys == '2':
+                position = (0.3, -0.1)
+                selectionIndicator.setPos(position)
+                selectionIndicator.setAutoDraw(True)
+            selection_made = True
+            
+            
             # Run 'Each Frame' code from good_side_code
             #if good_side has switched and they pick the good side 
             #for the first time, make first correct choice
@@ -903,6 +928,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if cue_resp.keys != None:  # we had a response
             trials.addData('cue_resp.rt', cue_resp.rt)
             trials.addData('cue_resp.duration', cue_resp.duration)
+        # Run 'End Routine' code from selection_indicator
+        selection_made = False
+        selectionIndicator.setAutoDraw(False)
         # Run 'End Routine' code from good_side_code
         #Check if these need to be reward or just right
         # I'm guessing rewarded
