@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Wed Mar  5 15:36:42 2025
+    on Thu Mar  6 13:50:37 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -451,6 +451,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     num_rewarded = 0
     num_switch = 0
     
+    too_slow_text = visual.TextStim(win=win, name='too_slow_text',
+        text='',
+        font='Arial',
+        pos=(0, .1), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=1.0, 
+        languageStyle='LTR',
+        depth=-6.0);
     
     # --- Initialize components for Routine "outcome" ---
     outcome_left_box = visual.ImageStim(
@@ -870,7 +877,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # create an object to store info about Routine cue
             cue = data.Routine(
                 name='cue',
-                components=[left_box, right_box, cue_resp],
+                components=[left_box, right_box, cue_resp, too_slow_text],
             )
             cue.status = NOT_STARTED
             continueRoutine = True
@@ -908,6 +915,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             
             
             
+            # Run 'Begin Routine' code from too_slow_message
+            routine_start = t
+            currentOpacity = 0
+            too_slow_text.setText('Too slow!')
             # store start times for cue
             cue.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
             cue.tStart = globalClock.getTime(format='float')
@@ -933,7 +944,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if isinstance(trials, data.TrialHandler2) and thisTrial.thisN != trials.thisTrial.thisN:
                 continueRoutine = False
             cue.forceEnded = routineForceEnded = not continueRoutine
-            while continueRoutine and routineTimer.getTime() < 1.7:
+            while continueRoutine and routineTimer.getTime() < 2.5:
                 # get current time
                 t = routineTimer.getTime()
                 tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -964,7 +975,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if left_box is stopping this frame...
                 if left_box.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > left_box.tStartRefresh + 1.7-frameTolerance:
+                    if tThisFlipGlobal > left_box.tStartRefresh + 2.5-frameTolerance:
                         # keep track of stop time/frame for later
                         left_box.tStop = t  # not accounting for scr refresh
                         left_box.tStopRefresh = tThisFlipGlobal  # on global time
@@ -998,7 +1009,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if right_box is stopping this frame...
                 if right_box.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > right_box.tStartRefresh + 1.7-frameTolerance:
+                    if tThisFlipGlobal > right_box.tStartRefresh + 2.5-frameTolerance:
                         # keep track of stop time/frame for later
                         right_box.tStop = t  # not accounting for scr refresh
                         right_box.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1077,6 +1088,46 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     next_1 = sequence.index(1, trials.thisN)
                     sequence[next_1] = 0
                     
+                # Run 'Each Frame' code from too_slow_message
+                #no key was pressed and time has elapsed
+                if(len(cue_resp.keys) == 0 and (t - routine_start > 1.5)):
+                    currentOpacity = 1
+                    
+                    
+                
+                # *too_slow_text* updates
+                
+                # if too_slow_text is starting this frame...
+                if too_slow_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                    # keep track of start time/frame for later
+                    too_slow_text.frameNStart = frameN  # exact frame index
+                    too_slow_text.tStart = t  # local t and not account for scr refresh
+                    too_slow_text.tStartRefresh = tThisFlipGlobal  # on global time
+                    win.timeOnFlip(too_slow_text, 'tStartRefresh')  # time at next scr refresh
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'too_slow_text.started')
+                    # update status
+                    too_slow_text.status = STARTED
+                    too_slow_text.setAutoDraw(True)
+                
+                # if too_slow_text is active this frame...
+                if too_slow_text.status == STARTED:
+                    # update params
+                    too_slow_text.setOpacity(currentOpacity, log=False)
+                
+                # if too_slow_text is stopping this frame...
+                if too_slow_text.status == STARTED:
+                    # is it time to stop? (based on global clock, using actual start)
+                    if tThisFlipGlobal > too_slow_text.tStartRefresh + 2.5-frameTolerance:
+                        # keep track of stop time/frame for later
+                        too_slow_text.tStop = t  # not accounting for scr refresh
+                        too_slow_text.tStopRefresh = tThisFlipGlobal  # on global time
+                        too_slow_text.frameNStop = frameN  # exact frame index
+                        # add timestamp to datafile
+                        thisExp.timestampOnFlip(win, 'too_slow_text.stopped')
+                        # update status
+                        too_slow_text.status = FINISHED
+                        too_slow_text.setAutoDraw(False)
                 
                 # check for quit (typically the Esc key)
                 if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1165,7 +1216,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             elif cue.forceEnded:
                 routineTimer.reset()
             else:
-                routineTimer.addTime(-1.700000)
+                routineTimer.addTime(-2.500000)
             
             # --- Prepare to start Routine "outcome" ---
             # create an object to store info about Routine outcome
