@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Thu Mar  6 13:50:37 2025
+    on Fri Mar  7 17:21:44 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -33,6 +33,9 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
+# Run 'Before Experiment' code from probability_sequence_code
+import random
+import csv
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -260,6 +263,12 @@ def setupDevices(expInfo, thisExp, win):
         deviceManager.addDevice(
             deviceClass='keyboard', deviceName='defaultKeyboard', backend='iohub'
         )
+    if deviceManager.getDevice('advance_to_runs') is None:
+        # initialise advance_to_runs
+        advance_to_runs = deviceManager.addDevice(
+            deviceClass='keyboard',
+            deviceName='advance_to_runs',
+        )
     if deviceManager.getDevice('advance_press') is None:
         # initialise advance_press
         advance_press = deviceManager.addDevice(
@@ -379,18 +388,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # Start Code - component code to be run after the window creation
     
-    # --- Initialize components for Routine "get_ready" ---
-    get_ready_text = visual.TextStim(win=win, name='get_ready_text',
-        text='Get Ready!',
+    # --- Initialize components for Routine "summary_instructions" ---
+    summary_text = visual.TextStim(win=win, name='summary_text',
+        text='1. In the game, there will be two boxes, but only one is magical.\n\n2. Sometimes, the magical box switches sides!\n\n3. Sometimes, even the magical box does not have a coin.\n\n\nTry to collect all the coins!\n',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    advance_press = keyboard.Keyboard(deviceName='advance_press')
+    # Run 'Begin Experiment' code from define_switches_code
+    #number correct for the switch occurs
+    num_switch_list = [7, 8, 9, 10, 11, 12, 13, 14, 15]
+    #now shuffle the list
+    random.shuffle(num_switch_list)
     # Run 'Begin Experiment' code from probability_sequence_code
-    import random
-    import csv
     sequence = []
     exp_correct = 0 #number of correct choices made in the experiment
     
@@ -411,11 +422,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     with open('test.csv', 'w', newline='') as myfile:
          wr = csv.writer(myfile)
          wr.writerow(sequence)
-    # Run 'Begin Experiment' code from define_switches_code
-    #number correct for the switch occurs
-    num_switch_list = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]#[7,8,9,10,11,12]
-    #now shuffle the list
-    random.shuffle(num_switch_list)
+    advance_to_runs = keyboard.Keyboard(deviceName='advance_to_runs')
+    
+    # --- Initialize components for Routine "get_ready" ---
+    get_ready_text = visual.TextStim(win=win, name='get_ready_text',
+        text='Get Ready!',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    advance_press = keyboard.Keyboard(deviceName='advance_press')
     
     # --- Initialize components for Routine "scanner_trigger" ---
     scanner_text = visual.TextStim(win=win, name='scanner_text',
@@ -523,6 +540,149 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         format='%Y-%m-%d %Hh%M.%S.%f %z', fractionalSecondDigits=6
     )
     
+    # --- Prepare to start Routine "summary_instructions" ---
+    # create an object to store info about Routine summary_instructions
+    summary_instructions = data.Routine(
+        name='summary_instructions',
+        components=[summary_text, advance_to_runs],
+    )
+    summary_instructions.status = NOT_STARTED
+    continueRoutine = True
+    # update component parameters for each repeat
+    # Run 'Begin Routine' code from probability_sequence_code
+    num_gold_coins = 0
+    # create starting attributes for advance_to_runs
+    advance_to_runs.keys = []
+    advance_to_runs.rt = []
+    _advance_to_runs_allKeys = []
+    # store start times for summary_instructions
+    summary_instructions.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    summary_instructions.tStart = globalClock.getTime(format='float')
+    summary_instructions.status = STARTED
+    thisExp.addData('summary_instructions.started', summary_instructions.tStart)
+    summary_instructions.maxDuration = None
+    # keep track of which components have finished
+    summary_instructionsComponents = summary_instructions.components
+    for thisComponent in summary_instructions.components:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "summary_instructions" ---
+    summary_instructions.forceEnded = routineForceEnded = not continueRoutine
+    while continueRoutine:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *summary_text* updates
+        
+        # if summary_text is starting this frame...
+        if summary_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            summary_text.frameNStart = frameN  # exact frame index
+            summary_text.tStart = t  # local t and not account for scr refresh
+            summary_text.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(summary_text, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'summary_text.started')
+            # update status
+            summary_text.status = STARTED
+            summary_text.setAutoDraw(True)
+        
+        # if summary_text is active this frame...
+        if summary_text.status == STARTED:
+            # update params
+            pass
+        
+        # *advance_to_runs* updates
+        waitOnFlip = False
+        
+        # if advance_to_runs is starting this frame...
+        if advance_to_runs.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            advance_to_runs.frameNStart = frameN  # exact frame index
+            advance_to_runs.tStart = t  # local t and not account for scr refresh
+            advance_to_runs.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(advance_to_runs, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'advance_to_runs.started')
+            # update status
+            advance_to_runs.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(advance_to_runs.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(advance_to_runs.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if advance_to_runs.status == STARTED and not waitOnFlip:
+            theseKeys = advance_to_runs.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+            _advance_to_runs_allKeys.extend(theseKeys)
+            if len(_advance_to_runs_allKeys):
+                advance_to_runs.keys = _advance_to_runs_allKeys[-1].name  # just the last key pressed
+                advance_to_runs.rt = _advance_to_runs_allKeys[-1].rt
+                advance_to_runs.duration = _advance_to_runs_allKeys[-1].duration
+                # a response ends the routine
+                continueRoutine = False
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        # pause experiment here if requested
+        if thisExp.status == PAUSED:
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[routineTimer], 
+                playbackComponents=[]
+            )
+            # skip the frame we paused on
+            continue
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            summary_instructions.forceEnded = routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in summary_instructions.components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "summary_instructions" ---
+    for thisComponent in summary_instructions.components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store stop times for summary_instructions
+    summary_instructions.tStop = globalClock.getTime(format='float')
+    summary_instructions.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('summary_instructions.stopped', summary_instructions.tStop)
+    # check responses
+    if advance_to_runs.keys in ['', [], None]:  # No response was made
+        advance_to_runs.keys = None
+    thisExp.addData('advance_to_runs.keys',advance_to_runs.keys)
+    if advance_to_runs.keys != None:  # we had a response
+        thisExp.addData('advance_to_runs.rt', advance_to_runs.rt)
+        thisExp.addData('advance_to_runs.duration', advance_to_runs.duration)
+    thisExp.nextEntry()
+    # the Routine "summary_instructions" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+    
     # set up handler to look after randomisation of conditions etc
     runs = data.TrialHandler2(
         name='runs',
@@ -567,8 +727,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         advance_press.keys = []
         advance_press.rt = []
         _advance_press_allKeys = []
-        # Run 'Begin Routine' code from probability_sequence_code
+        # Run 'Begin Routine' code from int_runs
         num_gold_coins = 0
+        
+        coin = random.randint(1, 2)
+        if coin == 1:
+            good_side = "left"
+        else:
+            good_side = "right"
         # store start times for get_ready
         get_ready.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         get_ready.tStart = globalClock.getTime(format='float')
@@ -845,7 +1011,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # set up handler to look after randomisation of conditions etc
         trials = data.TrialHandler2(
             name='trials',
-            nReps=5.0, 
+            nReps=50.0, 
             method='sequential', 
             extraInfo=expInfo, 
             originPath=-1, 
@@ -901,6 +1067,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # Run 'Begin Routine' code from good_side_code
             #if the participant has the right number of
             #correct guesses
+            print(num_rewarded)
+            print(sequence[exp_correct])
             if num_rewarded == num_switch_list[num_switch]:
                 if good_side == "right":
                     good_side = "left"
@@ -1083,9 +1251,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 #a gold coin
                 
                 if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))):
+                    print("trying to switch")
                     sequence[exp_correct] = 1
                     #double check this logic:
-                    next_1 = sequence.index(1, trials.thisN)
+                    next_1 = sequence.index(1, trials.thisN + 1)
+                    print("next one " + str(next_1))
                     sequence[next_1] = 0
                     
                 # Run 'Each Frame' code from too_slow_message
@@ -1204,8 +1374,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 
                 
             thisExp.addData('good_side', good_side)
-            thisExp.addData('cue_resp.keys', cue_resp.keys)
-            thisExp.addData('probability_sequence_value', sequence[trials.thisN])
+            thisExp.addData('probability_sequence_value', sequence[exp_correct - 1])
+            thisExp.addData('magic_number', num_switch_list[num_switch])
             thisExp.addData('num_rewarded', num_rewarded)
             thisExp.addData('num_switch', num_switch)
             thisExp.addData('total_correct', exp_correct)
@@ -1439,7 +1609,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if isinstance(trials, data.TrialHandler2) and thisTrial.thisN != trials.thisTrial.thisN:
                 continueRoutine = False
             fixation.forceEnded = routineForceEnded = not continueRoutine
-            while continueRoutine and routineTimer.getTime() < 0.5:
+            while continueRoutine and routineTimer.getTime() < 2.5:
                 # get current time
                 t = routineTimer.getTime()
                 tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1470,7 +1640,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if fixation_cross is stopping this frame...
                 if fixation_cross.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > fixation_cross.tStartRefresh + 0.5-frameTolerance:
+                    if tThisFlipGlobal > fixation_cross.tStartRefresh + 2.5-frameTolerance:
                         # keep track of stop time/frame for later
                         fixation_cross.tStop = t  # not accounting for scr refresh
                         fixation_cross.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1526,10 +1696,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             elif fixation.forceEnded:
                 routineTimer.reset()
             else:
-                routineTimer.addTime(-0.500000)
+                routineTimer.addTime(-2.500000)
             thisExp.nextEntry()
             
-        # completed 5.0 repeats of 'trials'
+        # completed 50.0 repeats of 'trials'
         
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now

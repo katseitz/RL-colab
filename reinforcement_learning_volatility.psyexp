@@ -197,15 +197,15 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="good_side = &quot;right&quot;&amp;#10;#counter = 0&amp;#10;num_rewarded = 0&amp;#10;num_switch = 0&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="good_side = &quot;right&quot;;&amp;#10;num_rewarded = 0;&amp;#10;num_switch = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((num_rewarded === num_switch_list[num_switch])) {&amp;#10;    if ((good_side === &quot;right&quot;)) {&amp;#10;        good_side = &quot;left&quot;;&amp;#10;    } else {&amp;#10;        if ((good_side === &quot;left&quot;)) {&amp;#10;            good_side = &quot;right&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;    num_rewarded = 0;&amp;#10;    num_switch = (num_switch + 1);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="#if the participant has the right number of&amp;#10;#correct guesses&amp;#10;if num_rewarded == num_switch_list[num_switch]:&amp;#10;    if good_side == &quot;right&quot;:&amp;#10;        good_side = &quot;left&quot;&amp;#10;    elif good_side == &quot;left&quot;:&amp;#10;        good_side = &quot;right&quot;&amp;#10;    num_rewarded = 0&amp;#10;    num_switch = num_switch + 1 # we move one switch forward&amp;#10;    &amp;#10;    &amp;#10;#if good_side has switched, make first correct choice&amp;#10;#a gold coin&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="console.log(num_rewarded);&amp;#10;console.log(sequence[exp_correct]);&amp;#10;if ((num_rewarded === num_switch_list[num_switch])) {&amp;#10;    if ((good_side === &quot;right&quot;)) {&amp;#10;        good_side = &quot;left&quot;;&amp;#10;    } else {&amp;#10;        if ((good_side === &quot;left&quot;)) {&amp;#10;            good_side = &quot;right&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;    num_rewarded = 0;&amp;#10;    num_switch = (num_switch + 1);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#if the participant has the right number of&amp;#10;#correct guesses&amp;#10;print(num_rewarded)&amp;#10;print(sequence[exp_correct])&amp;#10;if num_rewarded == num_switch_list[num_switch]:&amp;#10;    if good_side == &quot;right&quot;:&amp;#10;        good_side = &quot;left&quot;&amp;#10;    elif good_side == &quot;left&quot;:&amp;#10;        good_side = &quot;right&quot;&amp;#10;    num_rewarded = 0&amp;#10;    num_switch = num_switch + 1 # we move one switch forward&amp;#10;    &amp;#10;    &amp;#10;#if good_side has switched, make first correct choice&amp;#10;#a gold coin&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="#if good_side has switched and they pick the good side &amp;#10;#for the first time, make first correct choice&amp;#10;#a gold coin&amp;#10;&amp;#10;if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == '1' and good_side == &quot;left&quot;) or (cue_resp.keys == '2' and good_side == &quot;right&quot;))):&amp;#10;    sequence[exp_correct] = 1&amp;#10;    #double check this logic:&amp;#10;    next_1 = sequence.index(1, trials.thisN)&amp;#10;    sequence[next_1] = 0&amp;#10;    " valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="#if good_side has switched and they pick the good side &amp;#10;#for the first time, make first correct choice&amp;#10;#a gold coin&amp;#10;&amp;#10;if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == '1' and good_side == &quot;left&quot;) or (cue_resp.keys == '2' and good_side == &quot;right&quot;))):&amp;#10;    print(&quot;trying to switch&quot;)&amp;#10;    sequence[exp_correct] = 1&amp;#10;    #double check this logic:&amp;#10;    next_1 = sequence.index(1, trials.thisN + 1)&amp;#10;    print(&quot;next one &quot; + str(next_1))&amp;#10;    sequence[next_1] = 0&amp;#10;    " valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if ((((num_rewarded === 0) &amp;&amp; (sequence[exp_correct] === 0)) &amp;&amp; (((cue_resp.keys === &quot;1&quot;) &amp;&amp; (good_side === &quot;left&quot;)) || ((cue_resp.keys === &quot;2&quot;) &amp;&amp; (good_side === &quot;right&quot;))))) {&amp;#10;    console.log(&quot;trying to switch&quot;);&amp;#10;    sequence[exp_correct] = 1;&amp;#10;    next_1 = util.index(sequence, 1((trials.thisN + 1)));&amp;#10;    console.log((&quot;next one &quot; + next_1.toString()));&amp;#10;    sequence[next_1] = 0;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="if (((cue_resp.keys === &quot;1&quot;) &amp;&amp; (good_side === &quot;left&quot;))) {&amp;#10;    if ((sequence[exp_correct] === 1)) {&amp;#10;        num_rewarded = (num_rewarded + 1);&amp;#10;        num_gold_coins = (num_gold_coins + 1);&amp;#10;    }&amp;#10;    exp_correct = (exp_correct + 1);&amp;#10;}&amp;#10;if (((cue_resp.keys === &quot;2&quot;) &amp;&amp; (good_side === &quot;right&quot;))) {&amp;#10;    if ((sequence[exp_correct] === 1)) {&amp;#10;        num_rewarded = (num_rewarded + 1);&amp;#10;        num_gold_coins = (num_gold_coins + 1);&amp;#10;    }&amp;#10;    exp_correct = (exp_correct + 1);&amp;#10;}&amp;#10;psychoJS.experiment.addData(&quot;good_side&quot;, good_side);&amp;#10;psychoJS.experiment.addData(&quot;cue_resp.keys&quot;, cue_resp.keys);&amp;#10;psychoJS.experiment.addData(&quot;probability_sequence_value&quot;, sequence[trials.thisN]);&amp;#10;psychoJS.experiment.addData(&quot;num_rewarded&quot;, num_rewarded);&amp;#10;psychoJS.experiment.addData(&quot;num_switch&quot;, num_switch);&amp;#10;psychoJS.experiment.addData(&quot;total_correct&quot;, exp_correct);&amp;#10;psychoJS.experiment.addData(&quot;num_gold_coins&quot;, num_gold_coins);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="#Check if these need to be reward or just right&amp;#10;# I'm guessing rewarded&amp;#10;if(cue_resp.keys == '1' and good_side == &quot;left&quot;): &amp;#10;    if(sequence[exp_correct] == 1):&amp;#10;        num_rewarded = num_rewarded + 1&amp;#10;        num_gold_coins = num_gold_coins + 1&amp;#10;    exp_correct = exp_correct + 1 &amp;#10;    &amp;#10;&amp;#10;    &amp;#10;if(cue_resp.keys == '2' and good_side == &quot;right&quot;):&amp;#10;    if(sequence[exp_correct] == 1):&amp;#10;        num_rewarded = num_rewarded + 1&amp;#10;        num_gold_coins = num_gold_coins + 1&amp;#10;    exp_correct = exp_correct + 1&amp;#10;    &amp;#10;    &amp;#10;thisExp.addData('good_side', good_side)&amp;#10;thisExp.addData('cue_resp.keys', cue_resp.keys)&amp;#10;thisExp.addData('probability_sequence_value', sequence[trials.thisN])&amp;#10;thisExp.addData('num_rewarded', num_rewarded)&amp;#10;thisExp.addData('num_switch', num_switch)&amp;#10;thisExp.addData('total_correct', exp_correct)&amp;#10;thisExp.addData('num_gold_coins', num_gold_coins)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="#Check if these need to be reward or just right&amp;#10;# I'm guessing rewarded&amp;#10;if(cue_resp.keys == '1' and good_side == &quot;left&quot;): &amp;#10;    if(sequence[exp_correct] == 1):&amp;#10;        num_rewarded = num_rewarded + 1&amp;#10;        num_gold_coins = num_gold_coins + 1&amp;#10;    exp_correct = exp_correct + 1 &amp;#10;    &amp;#10;&amp;#10;    &amp;#10;if(cue_resp.keys == '2' and good_side == &quot;right&quot;):&amp;#10;    if(sequence[exp_correct] == 1):&amp;#10;        num_rewarded = num_rewarded + 1&amp;#10;        num_gold_coins = num_gold_coins + 1&amp;#10;    exp_correct = exp_correct + 1&amp;#10;    &amp;#10;    &amp;#10;thisExp.addData('good_side', good_side)&amp;#10;thisExp.addData('probability_sequence_value', sequence[exp_correct - 1])&amp;#10;thisExp.addData('magic_number', num_switch_list[num_switch])&amp;#10;thisExp.addData('num_rewarded', num_rewarded)&amp;#10;thisExp.addData('num_switch', num_switch)&amp;#10;thisExp.addData('total_correct', exp_correct)&amp;#10;thisExp.addData('num_gold_coins', num_gold_coins)" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="good_side_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -384,7 +384,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="0.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="2.5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="+" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -456,13 +456,13 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <CodeComponent name="probability_sequence_code" plugin="None">
+      <CodeComponent name="int_runs" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import random&amp;#10;import csv&amp;#10;sequence = []&amp;#10;exp_correct = 0 #number of correct choices made in the experiment&amp;#10;&amp;#10;&amp;#10;#TODO: pull this from experiment variables.&amp;#10;number_of_trials = 150&amp;#10;&amp;#10;while len(sequence) &lt; number_of_trials:&amp;#10;    #generate a probabilty list at 75p by alternating&amp;#10;    #ten trials at 80p and ten trials 70p.&amp;#10;    sequence_80 = [0] * 2 + [1] * 8&amp;#10;    random.shuffle(sequence_80)&amp;#10;    sequence_70 = [0] * 3 + [1] * 7&amp;#10;    random.shuffle(sequence_70)&amp;#10;    sequence = sequence + sequence_80 + sequence_70&amp;#10;    #TODO: output this sequence to a .csv that gets saved.&amp;#10;&amp;#10;with open('test.csv', 'w', newline='') as myfile:&amp;#10;     wr = csv.writer(myfile)&amp;#10;     wr.writerow(sequence)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="num_gold_coins = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="num_gold_coins = 0" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="num_gold_coins = 0;&amp;#10;coin = Math.random.randint(1, 2);&amp;#10;if ((coin === 1)) {&amp;#10;    good_side = &quot;left&quot;;&amp;#10;} else {&amp;#10;    good_side = &quot;right&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="num_gold_coins = 0&amp;#10;&amp;#10;coin = random.randint(1, 2)&amp;#10;if coin == 1:&amp;#10;    good_side = &quot;left&quot;&amp;#10;else:&amp;#10;    good_side = &quot;right&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -471,24 +471,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="probability_sequence_code" valType="code" updates="None" name="name"/>
-      </CodeComponent>
-      <CodeComponent name="define_switches_code" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="#number correct for the switch occurs&amp;#10;num_switch_list = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]#[7,8,9,10,11,12]&amp;#10;#now shuffle the list&amp;#10;random.shuffle(num_switch_list)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="num_switch_list = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];&amp;#10;Math.random.shuffle(num_switch_list);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="define_switches_code" valType="code" updates="None" name="name"/>
+        <Param val="int_runs" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
     <Routine name="run_feedback">
@@ -618,8 +601,108 @@
         <Param val="trigger_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
+    <Routine name="summary_instructions">
+      <RoutineSettingsComponent name="summary_instructions" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
+        <Param val="summary_instructions" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="summary_text" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Arial" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="summary_text" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="1. In the game, there will be two boxes, but only one is magical.&amp;#10;&amp;#10;2. Sometimes, the magical box switches sides!&amp;#10;&amp;#10;3. Sometimes, even the magical box does not have a coin.&amp;#10;&amp;#10;&amp;#10;Try to collect all the coins!&amp;#10;" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <CodeComponent name="define_switches_code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="#number correct for the switch occurs&amp;#10;num_switch_list = [7, 8, 9, 10, 11, 12, 13, 14, 15]&amp;#10;#now shuffle the list&amp;#10;random.shuffle(num_switch_list)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="num_switch_list = [7, 8, 9, 10, 11, 12, 13, 14, 15];&amp;#10;Math.random.shuffle(num_switch_list);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="define_switches_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <CodeComponent name="probability_sequence_code" plugin="None">
+        <Param val="import random&amp;#10;import csv" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import * as random from 'random';&amp;#10;import * as csv from 'csv';&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="sequence = []&amp;#10;exp_correct = 0 #number of correct choices made in the experiment&amp;#10;&amp;#10;&amp;#10;#TODO: pull this from experiment variables.&amp;#10;number_of_trials = 150&amp;#10;&amp;#10;while len(sequence) &lt; number_of_trials:&amp;#10;    #generate a probabilty list at 75p by alternating&amp;#10;    #ten trials at 80p and ten trials 70p.&amp;#10;    sequence_80 = [0] * 2 + [1] * 8&amp;#10;    random.shuffle(sequence_80)&amp;#10;    sequence_70 = [0] * 3 + [1] * 7&amp;#10;    random.shuffle(sequence_70)&amp;#10;    sequence = sequence + sequence_80 + sequence_70&amp;#10;    #TODO: output this sequence to a .csv that gets saved.&amp;#10;&amp;#10;with open('test.csv', 'w', newline='') as myfile:&amp;#10;     wr = csv.writer(myfile)&amp;#10;     wr.writerow(sequence)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="num_gold_coins = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="num_gold_coins = 0" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="probability_sequence_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <KeyboardComponent name="advance_to_runs" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="advance_to_runs" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
   </Routines>
   <Flow>
+    <Routine name="summary_instructions"/>
     <LoopInitiator loopType="TrialHandler" name="runs">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>
@@ -640,7 +723,7 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="5" valType="num"/>
+      <Param name="nReps" updates="None" val="50" valType="num"/>
       <Param name="name" updates="None" val="trials" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
