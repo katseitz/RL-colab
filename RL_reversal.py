@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Tue Mar 11 11:37:26 2025
+    on Tue Mar 11 11:32:15 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -129,7 +129,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/katharinaseitz/Documents/projects/RL-colab/reinforcement_learning_volatility_lastrun.py',
+        originPath='/Users/katharinaseitz/Documents/projects/RL-colab/RL_reversal.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -1393,45 +1393,41 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             continueRoutine = True
             # update component parameters for each repeat
             # Run 'Begin Routine' code from cue_resp_feedback_code
-            #initialize selection indicator
-            selection_indicator = visual.Rect(
-                win=win, name='polygon',
-                width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],
-                ori=0.0, draggable=False, anchor='center',
-                lineWidth=4.0,
-                colorSpace='rgb', lineColor='white', fillColor=None,
-                depth=-4.0, interpolate=True, 
-                autoDraw = False)
-                
-                
-            #initialize too slow message
-            too_slow_text = visual.TextStim(win=win, name='too_slow_text',
-            text='too slow',
-            font='Arial',
-            pos=(0, .1), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
-            color='white', colorSpace='rgb', opacity=1.0, 
-            languageStyle='LTR',
-            depth=-6.0, 
-            autoDraw = False)
-            
             #if response was made
             #get cue_resp.rt and figure out how much time is left over
             if(cue_resp.rt): 
                 remaining_t = 1.5 - cue_resp.rt
                 leftover_t = leftover_t + remaining_t
-                #select right or left
-                if cue_resp.keys == '1': 
-                    position = (-0.3, -0.2)
-                    selection_indicator.setPos(position)
-                    selection_indicator.setAutoDraw(True)
-                elif cue_resp.keys == '2':
-                    position = (0.3, -0.2)
-                    selection_indicator.setPos(position)
-                    selection_indicator.setAutoDraw(True)
+                #create selection indicator
+                selectionIndicator = visual.Rect(
+                    win=win, name='polygon',
+                    width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],
+                    ori=0.0, draggable=False, anchor='center',
+                    lineWidth=4.0,
+                    colorSpace='rgb', lineColor='white', fillColor=None,
+                    depth=-4.0, interpolate=True, 
+                    autoDraw = False)
+                    #select right or left
+                    if cue_resp.keys == '1': 
+                        position = (-0.3, -0.2)
+                        selectionIndicator.setPos(position)
+                        selectionIndicator.setAutoDraw(True)
+                    elif cue_resp.keys == '2':
+                        position = (0.3, -0.2)
+                        selectionIndicator.setPos(position)
+                        selectionIndicator.setAutoDraw(True)
+            
             
             #show too slow message    
             else:
-                too_slow_text.setAutoDraw(True)
+                too_slow_text = visual.TextStim(win=win, name='too_slow_text',
+                text='too slow',
+                font='Arial',
+                pos=(0, .1), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+                color='white', colorSpace='rgb', opacity=1.0, 
+                languageStyle='LTR',
+                depth=-6.0, 
+                autoDraw = True)
             # store start times for cue_response
             cue_response.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
             cue_response.tStart = globalClock.getTime(format='float')
@@ -1576,12 +1572,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             cue_response.tStop = globalClock.getTime(format='float')
             cue_response.tStopRefresh = tThisFlipGlobal
             thisExp.addData('cue_response.stopped', cue_response.tStop)
-            # Run 'End Routine' code from cue_resp_feedback_code
-            #turn off selection indicator
-            selection_indicator.setAutoDraw(False)
-            
-            #turn off too slow
-            too_slow_text.setAutoDraw(False)
             # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
             if cue_response.maxDurationReached:
                 routineTimer.addTime(-cue_response.maxDuration)
