@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Tue Mar 11 11:37:26 2025
+    on Tue Mar 11 21:24:19 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -47,7 +47,8 @@ expName = 'RL_reversal'  # from the Builder filename that created this script
 # information about this experiment
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
-    'session': '001',
+    'session': 'ses-1',
+    'restart_from_run': [None, 2,3],
     'date|hid': data.getDateStr(),
     'expName|hid': expName,
     'psychopyVersion|hid': psychopyVersion,
@@ -396,7 +397,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "summary_instructions" ---
     summary_text = visual.TextStim(win=win, name='summary_text',
-        text='1. In the game, there will be two boxes, but only one is magical.\n\n2. Sometimes, the magical box switches sides!\n\n3. Sometimes, even the magical box does not have a coin.\n\n\nTry to collect all the coins!\n',
+        text='1. In the game, there will be two boxes, but only one is magical.\n\n2. Sometimes, the magical box switches sides!\n\n3. Sometimes, even the magical box does not have a coin.\n\n\nTry to collect all the coins!\n\nPress the space bar to continue.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -425,14 +426,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         sequence = sequence + sequence_80 + sequence_70
         #TODO: output this sequence to a .csv that gets saved.
     
+    
     with open('test.csv', 'w', newline='') as myfile:
          wr = csv.writer(myfile)
          wr.writerow(sequence)
     advance_to_runs = keyboard.Keyboard(deviceName='advance_to_runs')
+    # Run 'Begin Experiment' code from restart_mid_exp_code
+    if expInfo["restart_from_run"]:
+        #if 3, have 1 run, if 2, have 2 runs
+        num_runs = 4 - expInfo["restart_from_run"] 
+    else:
+        num_runs = 3
     
     # --- Initialize components for Routine "get_ready" ---
     get_ready_text = visual.TextStim(win=win, name='get_ready_text',
-        text='Get Ready!',
+        text='Get Ready!\n\nPress the space bar to continue.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -442,7 +450,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "scanner_trigger" ---
     scanner_text = visual.TextStim(win=win, name='scanner_text',
-        text='waiting for scanner',
+        text='waiting for scanner\n\nPress "t" to emulate scanner trigger.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -516,7 +524,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     fixation_cross = visual.TextStim(win=win, name='fixation_cross',
         text='+',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -532,12 +540,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "leftover_time_break" ---
     fixation_end = visual.TextStim(win=win, name='fixation_end',
-        text='+',
+        text='',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
+    
+    # --- Initialize components for Routine "end_exp" ---
     
     # create some handy timers
     
@@ -713,7 +723,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     runs = data.TrialHandler2(
         name='runs',
-        nReps=3.0, 
+        nReps=num_runs, 
         method='sequential', 
         extraInfo=expInfo, 
         originPath=-1, 
@@ -754,15 +764,27 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         advance_press.keys = []
         advance_press.rt = []
         _advance_press_allKeys = []
-        # Run 'Begin Routine' code from int_runs
+        # Run 'Begin Routine' code from init_runs
         num_gold_coins = 0
         leftover_t = 0 #leftover time for fast RTs to run out at end of trial
         
+        #pick coin side for the start of the run
         coin = random.randint(1, 2)
         if coin == 1:
             good_side = "left"
         else:
             good_side = "right"
+          
+        good_side = "right"
+        #start at a new magic num for runs 2, 3
+        if runs.thisN != 0 and num_rewarded != 0:
+            num_switch = num_switch + 1
+            print(num_switch)
+        
+        
+        num_rewarded = 0 #start fresh for each run
+            
+        
         # store start times for get_ready
         get_ready.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         get_ready.tStart = globalClock.getTime(format='float')
@@ -906,6 +928,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         key_resp.keys = []
         key_resp.rt = []
         _key_resp_allKeys = []
+        # Run 'Begin Routine' code from trigger_code
+        waitForScannerClock = core.Clock()
+        fmriClock = core.Clock()
         # store start times for scanner_trigger
         scanner_trigger.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         scanner_trigger.tStart = globalClock.getTime(format='float')
@@ -978,7 +1003,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 win.callOnFlip(key_resp.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if key_resp.status == STARTED and not waitOnFlip:
-                theseKeys = key_resp.getKeys(keyList=['=', 'space'], ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = key_resp.getKeys(keyList=['t'], ignoreKeys=["escape"], waitRelease=False)
                 _key_resp_allKeys.extend(theseKeys)
                 if len(_key_resp_allKeys):
                     key_resp.keys = _key_resp_allKeys[-1].name  # just the last key pressed
@@ -1244,17 +1269,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         # a response ends the routine
                         continueRoutine = False
                 # Run 'Each Frame' code from good_side_code
-                #if good_side has switched and they pick the good side 
-                #for the first time, make first correct choice
-                #a gold coin
                 
-                if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))):
-                    print("trying to switch")
-                    sequence[exp_correct] = 1
-                    #double check this logic:
-                    next_1 = sequence.index(1, trials.thisN + 1)
-                    print("next one " + str(next_1))
-                    sequence[next_1] = 0
                     
                 
                 # *all_keys* updates
@@ -1344,6 +1359,22 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 trials.addData('cue_resp.rt', cue_resp.rt)
                 trials.addData('cue_resp.duration', cue_resp.duration)
             # Run 'End Routine' code from good_side_code
+            #if good_side has switched and they pick the good side 
+            #for the first time, make first correct choice
+            #a gold coin
+            
+            if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))):
+                print("trying to switch")
+                sequence[exp_correct] = 1
+                #double check this logic:
+                next_1 = sequence.index(1, exp_correct + 1)
+                sequence[next_1] = 0
+            print("trialNum " + str(trials.thisN))
+            print("rewards" + str(num_rewarded))
+            print("prob seq" + str(sequence[exp_correct]))
+            print((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))
+            
+            
             #Check if these need to be reward or just right
             # I'm guessing rewarded
             if(cue_resp.keys == '1' and good_side == "left"): 
@@ -1421,11 +1452,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 leftover_t = leftover_t + remaining_t
                 #select right or left
                 if cue_resp.keys == '1': 
-                    position = (-0.3, -0.2)
+                    position = (-0.3, -0.15)
                     selection_indicator.setPos(position)
                     selection_indicator.setAutoDraw(True)
                 elif cue_resp.keys == '2':
-                    position = (0.3, -0.2)
+                    position = (0.3, -0.15)
                     selection_indicator.setPos(position)
                     selection_indicator.setAutoDraw(True)
             
@@ -2040,6 +2071,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         leftover_time_break.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
+        fixation_end.setText('Take a short break for  ' + str(leftover_t) + ' seconds!!')
         # store start times for leftover_time_break
         leftover_time_break.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         leftover_time_break.tStart = globalClock.getTime(format='float')
@@ -2150,11 +2182,93 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         routineTimer.reset()
         thisExp.nextEntry()
         
-    # completed 3.0 repeats of 'runs'
+    # completed num_runs repeats of 'runs'
     
     if thisSession is not None:
         # if running in a Session with a Liaison client, send data up to now
         thisSession.sendExperimentData()
+    
+    # --- Prepare to start Routine "end_exp" ---
+    # create an object to store info about Routine end_exp
+    end_exp = data.Routine(
+        name='end_exp',
+        components=[],
+    )
+    end_exp.status = NOT_STARTED
+    continueRoutine = True
+    # update component parameters for each repeat
+    # store start times for end_exp
+    end_exp.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    end_exp.tStart = globalClock.getTime(format='float')
+    end_exp.status = STARTED
+    thisExp.addData('end_exp.started', end_exp.tStart)
+    end_exp.maxDuration = None
+    # keep track of which components have finished
+    end_expComponents = end_exp.components
+    for thisComponent in end_exp.components:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "end_exp" ---
+    end_exp.forceEnded = routineForceEnded = not continueRoutine
+    while continueRoutine:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        # pause experiment here if requested
+        if thisExp.status == PAUSED:
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[routineTimer], 
+                playbackComponents=[]
+            )
+            # skip the frame we paused on
+            continue
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            end_exp.forceEnded = routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in end_exp.components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "end_exp" ---
+    for thisComponent in end_exp.components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store stop times for end_exp
+    end_exp.tStop = globalClock.getTime(format='float')
+    end_exp.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('end_exp.stopped', end_exp.tStop)
+    thisExp.nextEntry()
+    # the Routine "end_exp" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
