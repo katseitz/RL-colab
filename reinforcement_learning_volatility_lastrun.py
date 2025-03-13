@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Wed Mar 12 12:06:01 2025
+    on Wed Mar 12 21:47:14 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -47,7 +47,7 @@ expName = 'RL_reversal'  # from the Builder filename that created this script
 # information about this experiment
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
-    'session': 'ses-1',
+    'handedness': ["right", "left"],
     'practice': [0,1],
     'restart_from_run': [None, 2,3],
     'date|hid': data.getDateStr(),
@@ -265,6 +265,12 @@ def setupDevices(expInfo, thisExp, win):
         deviceManager.addDevice(
             deviceClass='keyboard', deviceName='defaultKeyboard', backend='iohub'
         )
+    if deviceManager.getDevice('advance_press_pd') is None:
+        # initialise advance_press_pd
+        advance_press_pd = deviceManager.addDevice(
+            deviceClass='keyboard',
+            deviceName='advance_press_pd',
+        )
     if deviceManager.getDevice('cue_resp_lp') is None:
         # initialise cue_resp_lp
         cue_resp_lp = deviceManager.addDevice(
@@ -407,6 +413,27 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         frameDur = 1.0 / 60.0  # could not measure, so guess
     
     # Start Code - component code to be run after the window creation
+    
+    # --- Initialize components for Routine "prac_dir" ---
+    welcome_text = visual.TextStim(win=win, name='welcome_text',
+        text='In this game, your job is collect as many gold coins as possible. \n\nThere will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress the space bar to continue.',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    advance_press_pd = keyboard.Keyboard(deviceName='advance_press_pd')
+    # Run 'Begin Experiment' code from button_box_code
+    
+    if expInfo["handedness"] == "right":
+        left_button = '1'
+        right_button = '2'
+    else:
+        left_button = '9'
+        right_button = '0'
+        
+        
+    button_list = [left_button, right_button]
     
     # --- Initialize components for Routine "prac_left" ---
     left_box_lp = visual.ImageStim(
@@ -678,6 +705,147 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         format='%Y-%m-%d %Hh%M.%S.%f %z', fractionalSecondDigits=6
     )
     
+    # --- Prepare to start Routine "prac_dir" ---
+    # create an object to store info about Routine prac_dir
+    prac_dir = data.Routine(
+        name='prac_dir',
+        components=[welcome_text, advance_press_pd],
+    )
+    prac_dir.status = NOT_STARTED
+    continueRoutine = True
+    # update component parameters for each repeat
+    # create starting attributes for advance_press_pd
+    advance_press_pd.keys = []
+    advance_press_pd.rt = []
+    _advance_press_pd_allKeys = []
+    # store start times for prac_dir
+    prac_dir.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    prac_dir.tStart = globalClock.getTime(format='float')
+    prac_dir.status = STARTED
+    thisExp.addData('prac_dir.started', prac_dir.tStart)
+    prac_dir.maxDuration = None
+    # keep track of which components have finished
+    prac_dirComponents = prac_dir.components
+    for thisComponent in prac_dir.components:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "prac_dir" ---
+    prac_dir.forceEnded = routineForceEnded = not continueRoutine
+    while continueRoutine:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *welcome_text* updates
+        
+        # if welcome_text is starting this frame...
+        if welcome_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            welcome_text.frameNStart = frameN  # exact frame index
+            welcome_text.tStart = t  # local t and not account for scr refresh
+            welcome_text.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(welcome_text, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'welcome_text.started')
+            # update status
+            welcome_text.status = STARTED
+            welcome_text.setAutoDraw(True)
+        
+        # if welcome_text is active this frame...
+        if welcome_text.status == STARTED:
+            # update params
+            pass
+        
+        # *advance_press_pd* updates
+        waitOnFlip = False
+        
+        # if advance_press_pd is starting this frame...
+        if advance_press_pd.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            advance_press_pd.frameNStart = frameN  # exact frame index
+            advance_press_pd.tStart = t  # local t and not account for scr refresh
+            advance_press_pd.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(advance_press_pd, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'advance_press_pd.started')
+            # update status
+            advance_press_pd.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(advance_press_pd.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(advance_press_pd.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if advance_press_pd.status == STARTED and not waitOnFlip:
+            theseKeys = advance_press_pd.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+            _advance_press_pd_allKeys.extend(theseKeys)
+            if len(_advance_press_pd_allKeys):
+                advance_press_pd.keys = _advance_press_pd_allKeys[-1].name  # just the last key pressed
+                advance_press_pd.rt = _advance_press_pd_allKeys[-1].rt
+                advance_press_pd.duration = _advance_press_pd_allKeys[-1].duration
+                # a response ends the routine
+                continueRoutine = False
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        # pause experiment here if requested
+        if thisExp.status == PAUSED:
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[routineTimer], 
+                playbackComponents=[]
+            )
+            # skip the frame we paused on
+            continue
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            prac_dir.forceEnded = routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in prac_dir.components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "prac_dir" ---
+    for thisComponent in prac_dir.components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store stop times for prac_dir
+    prac_dir.tStop = globalClock.getTime(format='float')
+    prac_dir.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('prac_dir.stopped', prac_dir.tStop)
+    # check responses
+    if advance_press_pd.keys in ['', [], None]:  # No response was made
+        advance_press_pd.keys = None
+    thisExp.addData('advance_press_pd.keys',advance_press_pd.keys)
+    if advance_press_pd.keys != None:  # we had a response
+        thisExp.addData('advance_press_pd.rt', advance_press_pd.rt)
+        thisExp.addData('advance_press_pd.duration', advance_press_pd.duration)
+    thisExp.nextEntry()
+    # the Routine "prac_dir" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+    
     # set up handler to look after randomisation of conditions etc
     practice_loop = data.TrialHandler2(
         name='practice_loop',
@@ -722,6 +890,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cue_resp_lp.keys = []
         cue_resp_lp.rt = []
         _cue_resp_lp_allKeys = []
+        # allowedKeys looks like a variable, so make sure it exists locally
+        if 'left_button' in globals():
+            left_button = globals()['left_button']
         # store start times for prac_left
         prac_left.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         prac_left.tStart = globalClock.getTime(format='float')
@@ -809,12 +980,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 thisExp.timestampOnFlip(win, 'cue_resp_lp.started')
                 # update status
                 cue_resp_lp.status = STARTED
+                # allowed keys looks like a variable named `left_button`
+                if not type(left_button) in [list, tuple, np.ndarray]:
+                    if not isinstance(left_button, str):
+                        left_button = str(left_button)
+                    elif not ',' in left_button:
+                        left_button = (left_button,)
+                    else:
+                        left_button = eval(left_button)
                 # keyboard checking is just starting
                 waitOnFlip = True
                 win.callOnFlip(cue_resp_lp.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(cue_resp_lp.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if cue_resp_lp.status == STARTED and not waitOnFlip:
-                theseKeys = cue_resp_lp.getKeys(keyList=['1'], ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = cue_resp_lp.getKeys(keyList=list(left_button), ignoreKeys=["escape"], waitRelease=False)
                 _cue_resp_lp_allKeys.extend(theseKeys)
                 if len(_cue_resp_lp_allKeys):
                     cue_resp_lp.keys = _cue_resp_lp_allKeys[0].name  # just the first key pressed
@@ -1082,6 +1261,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cue_resp_rp.keys = []
         cue_resp_rp.rt = []
         _cue_resp_rp_allKeys = []
+        # allowedKeys looks like a variable, so make sure it exists locally
+        if 'right_button' in globals():
+            right_button = globals()['right_button']
         # store start times for prac_right
         prac_right.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         prac_right.tStart = globalClock.getTime(format='float')
@@ -1169,12 +1351,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 thisExp.timestampOnFlip(win, 'cue_resp_rp.started')
                 # update status
                 cue_resp_rp.status = STARTED
+                # allowed keys looks like a variable named `right_button`
+                if not type(right_button) in [list, tuple, np.ndarray]:
+                    if not isinstance(right_button, str):
+                        right_button = str(right_button)
+                    elif not ',' in right_button:
+                        right_button = (right_button,)
+                    else:
+                        right_button = eval(right_button)
                 # keyboard checking is just starting
                 waitOnFlip = True
                 win.callOnFlip(cue_resp_rp.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(cue_resp_rp.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if cue_resp_rp.status == STARTED and not waitOnFlip:
-                theseKeys = cue_resp_rp.getKeys(keyList=['2'], ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = cue_resp_rp.getKeys(keyList=list(right_button), ignoreKeys=["escape"], waitRelease=False)
                 _cue_resp_rp_allKeys.extend(theseKeys)
                 if len(_cue_resp_rp_allKeys):
                     cue_resp_rp.keys = _cue_resp_rp_allKeys[0].name  # just the first key pressed
@@ -1964,6 +2154,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             cue_resp.keys = []
             cue_resp.rt = []
             _cue_resp_allKeys = []
+            # allowedKeys looks like a variable, so make sure it exists locally
+            if 'button_list' in globals():
+                button_list = globals()['button_list']
             # Run 'Begin Routine' code from good_side_code
             #if the participant has the right number of
             #correct guesses
@@ -2100,6 +2293,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     thisExp.timestampOnFlip(win, 'cue_resp.started')
                     # update status
                     cue_resp.status = STARTED
+                    # allowed keys looks like a variable named `button_list`
+                    if not type(button_list) in [list, tuple, np.ndarray]:
+                        if not isinstance(button_list, str):
+                            button_list = str(button_list)
+                        elif not ',' in button_list:
+                            button_list = (button_list,)
+                        else:
+                            button_list = eval(button_list)
                     # keyboard checking is just starting
                     waitOnFlip = True
                     win.callOnFlip(cue_resp.clock.reset)  # t=0 on next screen flip
@@ -2119,7 +2320,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         cue_resp.status = FINISHED
                         cue_resp.status = FINISHED
                 if cue_resp.status == STARTED and not waitOnFlip:
-                    theseKeys = cue_resp.getKeys(keyList=['1','2'], ignoreKeys=["escape"], waitRelease=False)
+                    theseKeys = cue_resp.getKeys(keyList=list(button_list), ignoreKeys=["escape"], waitRelease=False)
                     _cue_resp_allKeys.extend(theseKeys)
                     if len(_cue_resp_allKeys):
                         cue_resp.keys = _cue_resp_allKeys[0].name  # just the first key pressed
@@ -2222,7 +2423,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             #for the first time, make first correct choice
             #a gold coin
             
-            if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == '1' and good_side == "left") or (cue_resp.keys == '2' and good_side == "right"))):
+            if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == left_button and good_side == "left") or (cue_resp.keys == right_button and good_side == "right"))):
                 print("trying to switch")
                 sequence[exp_correct] = 1
                 #double check this logic:
@@ -2237,7 +2438,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             
             #Check if these need to be reward or just right
             # I'm guessing rewarded
-            if(cue_resp.keys == '1' and good_side == "left"): 
+            if(cue_resp.keys == left_button and good_side == "left"): 
                 if(sequence[exp_correct] == 1):
                     num_rewarded = num_rewarded + 1
                     num_gold_coins = num_gold_coins + 1
@@ -2245,7 +2446,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 
             
                 
-            if(cue_resp.keys == '2' and good_side == "right"):
+            if(cue_resp.keys == right_button and good_side == "right"):
                 if(sequence[exp_correct] == 1):
                     num_rewarded = num_rewarded + 1
                     num_gold_coins = num_gold_coins + 1
@@ -2311,11 +2512,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 remaining_t = 1.5 - cue_resp.rt
                 leftover_t = leftover_t + remaining_t
                 #select right or left
-                if cue_resp.keys == '1': 
+                if cue_resp.keys == left_button: 
                     position = (-0.3, -0.15)
                     selection_indicator.setPos(position)
                     selection_indicator.setAutoDraw(True)
-                elif cue_resp.keys == '2':
+                elif cue_resp.keys == right_button:
                     position = (0.3, -0.15)
                     selection_indicator.setPos(position)
                     selection_indicator.setAutoDraw(True)
@@ -2494,16 +2695,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             #if no press is made
             right_image = 'stimuli/box_transparent.png'
             left_image = 'stimuli/box_transparent.png'
-            #if right press
-            if cue_resp.keys=='1': 
+            #if left press
+            if cue_resp.keys==left_button: 
                 #look back one since exp_correct has been incremented
                 if sequence[exp_correct - 1] == 1 and good_side == "left":
                     left_image = 'stimuli/box_coin_transparent.png'
                 else:
                     left_image = 'stimuli/box_empty_transparent.png'
-            #if left press
+            #if right press
             # load in images of either coin box or empty box conditionally
-            elif cue_resp.keys=='2': #same as above
+            elif cue_resp.keys==right_button: #same as above
                 #look back one since exp_correct has been incremented
                 if sequence[exp_correct -1 ] == 1 and good_side == "right":
                     right_image = 'stimuli/box_coin_transparent.png'
@@ -2654,9 +2855,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             outcome.tStopRefresh = tThisFlipGlobal
             thisExp.addData('outcome.stopped', outcome.tStop)
             # Run 'End Routine' code from box_selection_code
-            if cue_resp.keys=='1':
+            if cue_resp.keys==left_button:
                 thisExp.addData('outcome_image', left_image)
-            elif cue_resp.keys=='2':
+            elif cue_resp.keys==right_button:
                 thisExp.addData('outcome_image', right_image)
             else:
                 thisExp.addData('outcome_image', "no selection made")
