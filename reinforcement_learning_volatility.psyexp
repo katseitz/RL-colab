@@ -13,7 +13,7 @@
     <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
     <Param val="" valType="str" updates="None" name="HTML path"/>
     <Param val="" valType="str" updates="None" name="Incomplete URL"/>
-    <Param val="testMonitor" valType="str" updates="None" name="Monitor"/>
+    <Param val="kats_mac" valType="str" updates="None" name="Monitor"/>
     <Param val="[]" valType="list" updates="None" name="Resources"/>
     <Param val="False" valType="bool" updates="None" name="Save csv file"/>
     <Param val="False" valType="bool" updates="None" name="Save excel file"/>
@@ -522,7 +522,7 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="key_resp" plugin="None">
+      <KeyboardComponent name="trigger_value" plugin="None">
         <Param val="'t'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="" valType="str" updates="None" name="deviceLabel"/>
@@ -530,7 +530,7 @@
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="key_resp" valType="code" updates="None" name="name"/>
+        <Param val="trigger_value" valType="code" updates="None" name="name"/>
         <Param val="press" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
@@ -1331,8 +1331,8 @@
       <CodeComponent name="button_box_code" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="&amp;#10;if expInfo[&quot;handedness&quot;] == &quot;right&quot;:&amp;#10;    left_button = '1'&amp;#10;    right_button = '2'&amp;#10;else:&amp;#10;    left_button = '9'&amp;#10;    right_button = '0'&amp;#10;    &amp;#10;    &amp;#10;button_list = [left_button, right_button]" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="if ((expInfo[&quot;handedness&quot;] === &quot;right&quot;)) {&amp;#10;    left_button = &quot;1&quot;;&amp;#10;    right_button = &quot;2&quot;;&amp;#10;} else {&amp;#10;    left_button = &quot;9&quot;;&amp;#10;    right_button = &quot;0&quot;;&amp;#10;}&amp;#10;button_list = [left_button, right_button];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="#TODO change as needed by scanner site.&amp;#10;#define left and right button for right handed people&amp;#10;if expInfo[&quot;handedness&quot;] == &quot;right&quot;:&amp;#10;    left_button = '1' #vars must be in single quotes&amp;#10;    right_button = '2'&amp;#10;#define left and right button for right handed people&amp;#10;else:&amp;#10;    left_button = '1'&amp;#10;    right_button = '2'&amp;#10;    &amp;#10;#make a list for allowed key presses in cue routine&amp;#10;button_list = [left_button, right_button]" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="if ((expInfo[&quot;handedness&quot;] === &quot;right&quot;)) {&amp;#10;    left_button = &quot;1&quot;;&amp;#10;    right_button = &quot;2&quot;;&amp;#10;} else {&amp;#10;    left_button = &quot;1&quot;;&amp;#10;    right_button = &quot;2&quot;;&amp;#10;}&amp;#10;button_list = [left_button, right_button];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>

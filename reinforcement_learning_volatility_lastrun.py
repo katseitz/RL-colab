@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Wed Mar 12 21:47:14 2025
+    on Thu Mar 13 08:22:46 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -200,7 +200,7 @@ def setupWindow(expInfo=None, win=None):
         win = visual.Window(
             size=_winSize, fullscr=_fullScr, screen=0,
             winType='pyglet', allowGUI=False, allowStencil=False,
-            monitor='testMonitor', color=[-1,-1,-1], colorSpace='rgb',
+            monitor='kats_mac', color=[-1,-1,-1], colorSpace='rgb',
             backgroundImage='', backgroundFit='none',
             blendMode='avg', useFBO=True,
             units='height',
@@ -295,11 +295,11 @@ def setupDevices(expInfo, thisExp, win):
             deviceClass='keyboard',
             deviceName='advance_press',
         )
-    if deviceManager.getDevice('key_resp') is None:
-        # initialise key_resp
-        key_resp = deviceManager.addDevice(
+    if deviceManager.getDevice('trigger_value') is None:
+        # initialise trigger_value
+        trigger_value = deviceManager.addDevice(
             deviceClass='keyboard',
-            deviceName='key_resp',
+            deviceName='trigger_value',
         )
     if deviceManager.getDevice('cue_resp') is None:
         # initialise cue_resp
@@ -424,15 +424,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=0.0);
     advance_press_pd = keyboard.Keyboard(deviceName='advance_press_pd')
     # Run 'Begin Experiment' code from button_box_code
-    
+    #TODO change as needed by scanner site.
+    #define left and right button for right handed people
     if expInfo["handedness"] == "right":
+        left_button = '1' #vars must be in single quotes
+        right_button = '2'
+    #define left and right button for right handed people
+    else:
         left_button = '1'
         right_button = '2'
-    else:
-        left_button = '9'
-        right_button = '0'
         
-        
+    #make a list for allowed key presses in cue routine
     button_list = [left_button, right_button]
     
     # --- Initialize components for Routine "prac_left" ---
@@ -584,7 +586,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    key_resp = keyboard.Keyboard(deviceName='key_resp')
+    trigger_value = keyboard.Keyboard(deviceName='trigger_value')
     
     # --- Initialize components for Routine "cue" ---
     left_box = visual.ImageStim(
@@ -1968,15 +1970,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine scanner_trigger
         scanner_trigger = data.Routine(
             name='scanner_trigger',
-            components=[scanner_text, key_resp],
+            components=[scanner_text, trigger_value],
         )
         scanner_trigger.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        # create starting attributes for key_resp
-        key_resp.keys = []
-        key_resp.rt = []
-        _key_resp_allKeys = []
+        # create starting attributes for trigger_value
+        trigger_value.keys = []
+        trigger_value.rt = []
+        _trigger_value_allKeys = []
         # Run 'Begin Routine' code from trigger_code
         waitForScannerClock = core.Clock()
         fmriClock = core.Clock()
@@ -2033,31 +2035,31 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # update params
                 pass
             
-            # *key_resp* updates
+            # *trigger_value* updates
             waitOnFlip = False
             
-            # if key_resp is starting this frame...
-            if key_resp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # if trigger_value is starting this frame...
+            if trigger_value.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                key_resp.frameNStart = frameN  # exact frame index
-                key_resp.tStart = t  # local t and not account for scr refresh
-                key_resp.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(key_resp, 'tStartRefresh')  # time at next scr refresh
+                trigger_value.frameNStart = frameN  # exact frame index
+                trigger_value.tStart = t  # local t and not account for scr refresh
+                trigger_value.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(trigger_value, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'key_resp.started')
+                thisExp.timestampOnFlip(win, 'trigger_value.started')
                 # update status
-                key_resp.status = STARTED
+                trigger_value.status = STARTED
                 # keyboard checking is just starting
                 waitOnFlip = True
-                win.callOnFlip(key_resp.clock.reset)  # t=0 on next screen flip
-                win.callOnFlip(key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
-            if key_resp.status == STARTED and not waitOnFlip:
-                theseKeys = key_resp.getKeys(keyList=['t'], ignoreKeys=["escape"], waitRelease=False)
-                _key_resp_allKeys.extend(theseKeys)
-                if len(_key_resp_allKeys):
-                    key_resp.keys = _key_resp_allKeys[-1].name  # just the last key pressed
-                    key_resp.rt = _key_resp_allKeys[-1].rt
-                    key_resp.duration = _key_resp_allKeys[-1].duration
+                win.callOnFlip(trigger_value.clock.reset)  # t=0 on next screen flip
+                win.callOnFlip(trigger_value.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            if trigger_value.status == STARTED and not waitOnFlip:
+                theseKeys = trigger_value.getKeys(keyList=['t'], ignoreKeys=["escape"], waitRelease=False)
+                _trigger_value_allKeys.extend(theseKeys)
+                if len(_trigger_value_allKeys):
+                    trigger_value.keys = _trigger_value_allKeys[-1].name  # just the last key pressed
+                    trigger_value.rt = _trigger_value_allKeys[-1].rt
+                    trigger_value.duration = _trigger_value_allKeys[-1].duration
                     # a response ends the routine
                     continueRoutine = False
             
@@ -2101,12 +2103,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         scanner_trigger.tStopRefresh = tThisFlipGlobal
         thisExp.addData('scanner_trigger.stopped', scanner_trigger.tStop)
         # check responses
-        if key_resp.keys in ['', [], None]:  # No response was made
-            key_resp.keys = None
-        runs.addData('key_resp.keys',key_resp.keys)
-        if key_resp.keys != None:  # we had a response
-            runs.addData('key_resp.rt', key_resp.rt)
-            runs.addData('key_resp.duration', key_resp.duration)
+        if trigger_value.keys in ['', [], None]:  # No response was made
+            trigger_value.keys = None
+        runs.addData('trigger_value.keys',trigger_value.keys)
+        if trigger_value.keys != None:  # we had a response
+            runs.addData('trigger_value.rt', trigger_value.rt)
+            runs.addData('trigger_value.duration', trigger_value.duration)
         # the Routine "scanner_trigger" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
