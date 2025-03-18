@@ -212,6 +212,23 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
+      <CodeComponent name="jitters_code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#Grab right ITI and ISI for this trial num&amp;#10;ISI = jitters.loc[(jitters['Run'] == runs.thisN + 1) &amp; (jitters['Trial'] == trials.thisN + 1)][&quot;ISI&quot;].item() / 1000&amp;#10;ITI = jitters.loc[(jitters['Run'] == runs.thisN + 1) &amp; (jitters['Trial'] == trials.thisN + 1)][&quot;ITI&quot;].item() / 1000&amp;#10;&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="jitters_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="outcome">
       <RoutineSettingsComponent name="outcome" plugin="None">
@@ -343,7 +360,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="2.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="ITI" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="+" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -517,13 +534,13 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="waiting for scanner&amp;#10;&amp;#10;Press &quot;t&quot; to emulate scanner trigger." valType="str" updates="constant" name="text"/>
+        <Param val="waiting for scanner&amp;#10;&amp;#10;Press &quot;5&quot; to emulate scanner trigger." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <KeyboardComponent name="trigger_value" plugin="None">
-        <Param val="'t'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="'5'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -658,11 +675,11 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <CodeComponent name="restart_mid_exp_code" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="if expInfo[&quot;restart_from_run&quot;]:&amp;#10;    #if 3, have 1 run, if 2, have 2 runs&amp;#10;    num_runs = 4 - expInfo[&quot;restart_from_run&quot;] &amp;#10;else:&amp;#10;    num_runs = 3" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="if (expInfo[&quot;restart_from_run&quot;]) {&amp;#10;    num_runs = (4 - expInfo[&quot;restart_from_run&quot;]);&amp;#10;} else {&amp;#10;    num_runs = 3;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+      <CodeComponent name="restart_mid_and_iti_code" plugin="None">
+        <Param val="import pandas as pd" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import * as pd from 'pandas';&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="if expInfo[&quot;restart_from_run&quot;]:&amp;#10;    #if 3, have 1 run, if 2, have 2 runs&amp;#10;    num_runs = 4 - expInfo[&quot;restart_from_run&quot;] &amp;#10;else:&amp;#10;    num_runs = 3&amp;#10;    &amp;#10;    &amp;#10;#read in ISI and ITI jitters&amp;#10;jitters = pd.read_csv('rl_reversal_jitters.csv')" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="if (expInfo[&quot;restart_from_run&quot;]) {&amp;#10;    num_runs = (4 - expInfo[&quot;restart_from_run&quot;]);&amp;#10;} else {&amp;#10;    num_runs = 3;&amp;#10;}&amp;#10;jitters = pd.read_csv(&quot;rl_reversal_jitters.csv&quot;);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -673,7 +690,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="restart_mid_exp_code" valType="code" updates="None" name="name"/>
+        <Param val="restart_mid_and_iti_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
     <Routine name="leftover_time_break">
@@ -778,7 +795,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1" valType="code" updates="constant" name="stopVal"/>
+        <Param val="ISI" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -807,7 +824,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1" valType="code" updates="constant" name="stopVal"/>
+        <Param val="ISI" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>

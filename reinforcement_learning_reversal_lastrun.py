@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Thu Mar 13 08:36:53 2025
+    on Tue Mar 18 11:24:45 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -36,6 +36,8 @@ from psychopy.hardware import keyboard
 # Run 'Before Experiment' code from probability_sequence_code
 import random
 import csv
+# Run 'Before Experiment' code from restart_mid_and_iti_code
+import pandas as pd
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -561,12 +563,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
          wr = csv.writer(myfile)
          wr.writerow(sequence)
     advance_to_runs = keyboard.Keyboard(deviceName='advance_to_runs')
-    # Run 'Begin Experiment' code from restart_mid_exp_code
+    # Run 'Begin Experiment' code from restart_mid_and_iti_code
     if expInfo["restart_from_run"]:
         #if 3, have 1 run, if 2, have 2 runs
         num_runs = 4 - expInfo["restart_from_run"] 
     else:
         num_runs = 3
+        
+        
+    #read in ISI and ITI jitters
+    jitters = pd.read_csv('rl_reversal_jitters.csv')
     
     # --- Initialize components for Routine "get_ready" ---
     get_ready_text = visual.TextStim(win=win, name='get_ready_text',
@@ -580,7 +586,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "scanner_trigger" ---
     scanner_text = visual.TextStim(win=win, name='scanner_text',
-        text='waiting for scanner\n\nPress "t" to emulate scanner trigger.',
+        text='waiting for scanner\n\nPress "5" to emulate scanner trigger.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -2054,7 +2060,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 win.callOnFlip(trigger_value.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(trigger_value.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if trigger_value.status == STARTED and not waitOnFlip:
-                theseKeys = trigger_value.getKeys(keyList=['t'], ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = trigger_value.getKeys(keyList=['5'], ignoreKeys=["escape"], waitRelease=False)
                 _trigger_value_allKeys.extend(theseKeys)
                 if len(_trigger_value_allKeys):
                     trigger_value.keys = _trigger_value_allKeys[-1].name  # just the last key pressed
@@ -2180,6 +2186,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             all_keys.keys = []
             all_keys.rt = []
             _all_keys_allKeys = []
+            # Run 'Begin Routine' code from jitters_code
+            #Grab right ITI and ISI for this trial num
+            ISI = jitters.loc[(jitters['Run'] == runs.thisN + 1) & (jitters['Trial'] == trials.thisN + 1)]["ISI"].item() / 1000
+            ITI = jitters.loc[(jitters['Run'] == runs.thisN + 1) & (jitters['Trial'] == trials.thisN + 1)]["ITI"].item() / 1000
+            
+            
+            
+            
+            
             # store start times for cue
             cue.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
             cue.tStart = globalClock.getTime(format='float')
@@ -2551,7 +2566,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if isinstance(trials, data.TrialHandler2) and thisTrial.thisN != trials.thisTrial.thisN:
                 continueRoutine = False
             cue_response.forceEnded = routineForceEnded = not continueRoutine
-            while continueRoutine and routineTimer.getTime() < 1.0:
+            while continueRoutine:
                 # get current time
                 t = routineTimer.getTime()
                 tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -2586,7 +2601,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if left_box_response is stopping this frame...
                 if left_box_response.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > left_box_response.tStartRefresh + 1-frameTolerance:
+                    if tThisFlipGlobal > left_box_response.tStartRefresh + ISI-frameTolerance:
                         # keep track of stop time/frame for later
                         left_box_response.tStop = t  # not accounting for scr refresh
                         left_box_response.tStopRefresh = tThisFlipGlobal  # on global time
@@ -2620,7 +2635,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if right_box_response is stopping this frame...
                 if right_box_response.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > right_box_response.tStartRefresh + 1-frameTolerance:
+                    if tThisFlipGlobal > right_box_response.tStartRefresh + ISI-frameTolerance:
                         # keep track of stop time/frame for later
                         right_box_response.tStop = t  # not accounting for scr refresh
                         right_box_response.tStopRefresh = tThisFlipGlobal  # on global time
@@ -2676,13 +2691,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             
             #turn off too slow
             too_slow_text.setAutoDraw(False)
-            # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-            if cue_response.maxDurationReached:
-                routineTimer.addTime(-cue_response.maxDuration)
-            elif cue_response.forceEnded:
-                routineTimer.reset()
-            else:
-                routineTimer.addTime(-1.000000)
+            # the Routine "cue_response" was not non-slip safe, so reset the non-slip timer
+            routineTimer.reset()
             
             # --- Prepare to start Routine "outcome" ---
             # create an object to store info about Routine outcome
@@ -2905,7 +2915,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if isinstance(trials, data.TrialHandler2) and thisTrial.thisN != trials.thisTrial.thisN:
                 continueRoutine = False
             fixation.forceEnded = routineForceEnded = not continueRoutine
-            while continueRoutine and routineTimer.getTime() < 2.5:
+            while continueRoutine:
                 # get current time
                 t = routineTimer.getTime()
                 tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -2936,7 +2946,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if fixation_cross is stopping this frame...
                 if fixation_cross.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > fixation_cross.tStartRefresh + 2.5-frameTolerance:
+                    if tThisFlipGlobal > fixation_cross.tStartRefresh + ITI-frameTolerance:
                         # keep track of stop time/frame for later
                         fixation_cross.tStop = t  # not accounting for scr refresh
                         fixation_cross.tStopRefresh = tThisFlipGlobal  # on global time
@@ -2986,13 +2996,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             fixation.tStop = globalClock.getTime(format='float')
             fixation.tStopRefresh = tThisFlipGlobal
             thisExp.addData('fixation.stopped', fixation.tStop)
-            # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-            if fixation.maxDurationReached:
-                routineTimer.addTime(-fixation.maxDuration)
-            elif fixation.forceEnded:
-                routineTimer.reset()
-            else:
-                routineTimer.addTime(-2.500000)
+            # the Routine "fixation" was not non-slip safe, so reset the non-slip timer
+            routineTimer.reset()
             thisExp.nextEntry()
             
         # completed 50.0 repeats of 'trials'
