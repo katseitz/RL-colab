@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Thu Mar 20 09:25:03 2025
+    on Thu Mar 20 09:52:13 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -430,11 +430,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     #define left and right button for right handed people
     if expInfo["handedness"] == "right":
         left_button = '1' #vars must be in single quotes
+        prac_left_button = left_button
         right_button = '2'
+        prac_right_button = right_button
     #define left and right button for right handed people
     else:
         left_button = '1'
+        prac_left_button = left_button
         right_button = '2'
+        prac_right_button = right_button
         
     #make a list for allowed key presses in cue routine
     button_list = [left_button, right_button]
@@ -621,6 +625,26 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     all_keys = keyboard.Keyboard(deviceName='all_keys')
     
     # --- Initialize components for Routine "cue_response" ---
+    # Run 'Begin Experiment' code from cue_resp_feedback_code
+    #initialize selection indicator
+    selection_indicator = visual.Rect(
+        win=win, name='selection_poly',
+        width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],
+        ori=0.0, draggable=False, anchor='center',
+        lineWidth=4.0,
+        colorSpace='rgb', lineColor='white', fillColor=None,
+        depth=-4.0, interpolate=True, 
+        autoDraw = False)
+        
+    #initialize too slow message
+    too_slow_text = visual.TextStim(win=win, name='too_slow_text',
+    text='too slow',
+    font='Arial',
+    pos=(0, .1), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+    color='white', colorSpace='rgb', opacity=1.0, 
+    languageStyle='LTR',
+    depth=-6.0, 
+    autoDraw = False)
     left_box_response = visual.ImageStim(
         win=win,
         name='left_box_response', 
@@ -899,8 +923,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cue_resp_lp.rt = []
         _cue_resp_lp_allKeys = []
         # allowedKeys looks like a variable, so make sure it exists locally
-        if 'left_button' in globals():
-            left_button = globals()['left_button']
+        if 'prac_left_button' in globals():
+            prac_left_button = globals()['prac_left_button']
         # store start times for prac_left
         prac_left.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         prac_left.tStart = globalClock.getTime(format='float')
@@ -988,20 +1012,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 thisExp.timestampOnFlip(win, 'cue_resp_lp.started')
                 # update status
                 cue_resp_lp.status = STARTED
-                # allowed keys looks like a variable named `left_button`
-                if not type(left_button) in [list, tuple, np.ndarray]:
-                    if not isinstance(left_button, str):
-                        left_button = str(left_button)
-                    elif not ',' in left_button:
-                        left_button = (left_button,)
+                # allowed keys looks like a variable named `prac_left_button`
+                if not type(prac_left_button) in [list, tuple, np.ndarray]:
+                    if not isinstance(prac_left_button, str):
+                        prac_left_button = str(prac_left_button)
+                    elif not ',' in prac_left_button:
+                        prac_left_button = (prac_left_button,)
                     else:
-                        left_button = eval(left_button)
+                        prac_left_button = eval(prac_left_button)
                 # keyboard checking is just starting
                 waitOnFlip = True
                 win.callOnFlip(cue_resp_lp.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(cue_resp_lp.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if cue_resp_lp.status == STARTED and not waitOnFlip:
-                theseKeys = cue_resp_lp.getKeys(keyList=list(left_button), ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = cue_resp_lp.getKeys(keyList=list(prac_left_button), ignoreKeys=["escape"], waitRelease=False)
                 _cue_resp_lp_allKeys.extend(theseKeys)
                 if len(_cue_resp_lp_allKeys):
                     cue_resp_lp.keys = _cue_resp_lp_allKeys[0].name  # just the first key pressed
@@ -1090,8 +1114,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # update component parameters for each repeat
         # Run 'Begin Routine' code from prac_left_feedback
         #initialize selection indicator
+        '''
         pr_selection_indicator = visual.Rect(
-            win=win, name='polygon',
+            win=win, name='left_select',
             width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],
             ori=0.0, draggable=False, anchor='center',
             lineWidth=4.0,
@@ -1099,7 +1124,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             colorSpace='rgb', lineColor='white', fillColor=None,
             depth=-4.0, interpolate=True, 
             autoDraw = True)
-         
+         '''
+        position = (-0.3, -0.15)
+        selection_indicator.setPos(position)
+        selection_indicator.setAutoDraw(True)
         
         # store start times for prac_left_response
         prac_left_response.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
@@ -1247,7 +1275,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisExp.addData('prac_left_response.stopped', prac_left_response.tStop)
         # Run 'End Routine' code from prac_left_feedback
         #turn off selection indicator
-        pr_selection_indicator.setAutoDraw(False)
+        #pr_selection_indicator.setAutoDraw(False)
+        selection_indicator.setAutoDraw(False)
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if prac_left_response.maxDurationReached:
             routineTimer.addTime(-prac_left_response.maxDuration)
@@ -1270,8 +1299,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cue_resp_rp.rt = []
         _cue_resp_rp_allKeys = []
         # allowedKeys looks like a variable, so make sure it exists locally
-        if 'right_button' in globals():
-            right_button = globals()['right_button']
+        if 'prac_right_button' in globals():
+            prac_right_button = globals()['prac_right_button']
         # store start times for prac_right
         prac_right.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         prac_right.tStart = globalClock.getTime(format='float')
@@ -1359,20 +1388,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 thisExp.timestampOnFlip(win, 'cue_resp_rp.started')
                 # update status
                 cue_resp_rp.status = STARTED
-                # allowed keys looks like a variable named `right_button`
-                if not type(right_button) in [list, tuple, np.ndarray]:
-                    if not isinstance(right_button, str):
-                        right_button = str(right_button)
-                    elif not ',' in right_button:
-                        right_button = (right_button,)
+                # allowed keys looks like a variable named `prac_right_button`
+                if not type(prac_right_button) in [list, tuple, np.ndarray]:
+                    if not isinstance(prac_right_button, str):
+                        prac_right_button = str(prac_right_button)
+                    elif not ',' in prac_right_button:
+                        prac_right_button = (prac_right_button,)
                     else:
-                        right_button = eval(right_button)
+                        prac_right_button = eval(prac_right_button)
                 # keyboard checking is just starting
                 waitOnFlip = True
                 win.callOnFlip(cue_resp_rp.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(cue_resp_rp.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if cue_resp_rp.status == STARTED and not waitOnFlip:
-                theseKeys = cue_resp_rp.getKeys(keyList=list(right_button), ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = cue_resp_rp.getKeys(keyList=list(prac_right_button), ignoreKeys=["escape"], waitRelease=False)
                 _cue_resp_rp_allKeys.extend(theseKeys)
                 if len(_cue_resp_rp_allKeys):
                     cue_resp_rp.keys = _cue_resp_rp_allKeys[0].name  # just the first key pressed
@@ -1461,8 +1490,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # update component parameters for each repeat
         # Run 'Begin Routine' code from prac_right_feedback
         #initialize selection indicator
+        '''
         pr_selection_indicator = visual.Rect(
-            win=win, name='polygon',
+            win=win, name='right_select_poly',
             width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],
             ori=0.0, draggable=False, anchor='center',
             lineWidth=4.0,
@@ -1470,6 +1500,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             colorSpace='rgb', lineColor='white', fillColor=None,
             depth=-4.0, interpolate=True, 
             autoDraw = True)
+         '''
+        position = (0.3, -0.15)
+        selection_indicator.setPos(position)
+        selection_indicator.setAutoDraw(True)
+        
          
         
         # store start times for prac_right_response
@@ -1618,7 +1653,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisExp.addData('prac_right_response.stopped', prac_right_response.tStop)
         # Run 'End Routine' code from prac_right_feedback
         #turn off selection indicator
-        pr_selection_indicator.setAutoDraw(False)
+        #pr_selection_indicator.setAutoDraw(False)
+        selection_indicator.setAutoDraw(False)
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if prac_right_response.maxDurationReached:
             routineTimer.addTime(-prac_right_response.maxDuration)
@@ -2508,34 +2544,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             continueRoutine = True
             # update component parameters for each repeat
             # Run 'Begin Routine' code from cue_resp_feedback_code
-            #initialize selection indicator
-            selection_indicator = visual.Rect(
-                win=win, name='polygon',
-                width=(0.5, 0.5)[0], height=(0.5, 0.5)[1],
-                ori=0.0, draggable=False, anchor='center',
-                lineWidth=4.0,
-                colorSpace='rgb', lineColor='white', fillColor=None,
-                depth=-4.0, interpolate=True, 
-                autoDraw = False)
-                
-                
-            #initialize too slow message
-            too_slow_text = visual.TextStim(win=win, name='too_slow_text',
-            text='too slow',
-            font='Arial',
-            pos=(0, .1), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
-            color='white', colorSpace='rgb', opacity=1.0, 
-            languageStyle='LTR',
-            depth=-6.0, 
-            autoDraw = False)
-            
             #if response was made
             #get cue_resp.rt and figure out how much time is left over
             if(cue_resp.rt): 
                 remaining_t = 1.5 - cue_resp.rt
                 leftover_t = leftover_t + remaining_t
                 #select right or left
+                print(cue_resp.keys )
+                print(left_button)
                 if cue_resp.keys == left_button: 
+                    print("trying to select")
                     position = (-0.3, -0.15)
                     selection_indicator.setPos(position)
                     selection_indicator.setAutoDraw(True)
