@@ -8,7 +8,7 @@
     <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
     <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
     <Param val="Thank you for your patience." valType="str" updates="None" name="End Message"/>
-    <Param val="{'participant': 'f&quot;{randint(0, 999999):06.0f}&quot;', 'handedness': '[&quot;right&quot;, &quot;left&quot;]', 'practice': '[0,1]', 'restart_from_run': '[None, 2,3]'}" valType="code" updates="None" name="Experiment info"/>
+    <Param val="{'participant': 'f&quot;{randint(0, 999999):06.0f}&quot;', 'handedness': '[&quot;right&quot;, &quot;left&quot;]', 'practice': '[&quot;no&quot;,&quot;yes&quot;]', 'restart_from_run': '[None, 2,3]'}" valType="code" updates="None" name="Experiment info"/>
     <Param val="True" valType="bool" updates="None" name="Force stereo"/>
     <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
     <Param val="" valType="str" updates="None" name="HTML path"/>
@@ -641,8 +641,8 @@
       <CodeComponent name="define_switches_code" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="#number correct for the switch occurs&amp;#10;num_switch_list = [7, 8, 9, 10, 11, 12, 13, 14, 15]&amp;#10;#now shuffle the list&amp;#10;random.shuffle(num_switch_list)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="num_switch_list = [7, 8, 9, 10, 11, 12, 13, 14, 15];&amp;#10;Math.random.shuffle(num_switch_list);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="#number correct for the switch occurs&amp;#10;numbers_1 = [7, 8, 9, 10, 11, 12, 13, 14, 15]&amp;#10;numbers_2 = [7, 8, 9, 10, 11, 12, 13, 14, 15]&amp;#10;#now shuffle the lists&amp;#10;random.shuffle(numbers_1)&amp;#10;random.shuffle(numbers_2)&amp;#10;num_switch_list = numbers_1 + numbers_2&amp;#10;&amp;#10;print(num_switch_list)&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="numbers_1 = [7, 8, 9, 10, 11, 12, 13, 14, 15];&amp;#10;numbers_2 = [7, 8, 9, 10, 11, 12, 13, 14, 15];&amp;#10;Math.random.shuffle(numbers_1);&amp;#10;Math.random.shuffle(numbers_2);&amp;#10;num_switch_list = (numbers_1 + numbers_2);&amp;#10;console.log(num_switch_list);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -1362,11 +1362,11 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <CodeComponent name="button_box_code" plugin="None">
+      <CodeComponent name="button_box_and_practice_code" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="#TODO change as needed by scanner site.&amp;#10;#define left and right button for right handed people&amp;#10;if expInfo[&quot;handedness&quot;] == &quot;right&quot;:&amp;#10;    left_button = '1' #vars must be in single quotes&amp;#10;    prac_left_button = left_button&amp;#10;    right_button = '2'&amp;#10;    prac_right_button = right_button&amp;#10;#define left and right button for right handed people&amp;#10;else:&amp;#10;    left_button = '1'&amp;#10;    prac_left_button = left_button&amp;#10;    right_button = '2'&amp;#10;    prac_right_button = right_button&amp;#10;    &amp;#10;#make a list for allowed key presses in cue routine&amp;#10;button_list = [left_button, right_button]" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="if ((expInfo[&quot;handedness&quot;] === &quot;right&quot;)) {&amp;#10;    left_button = &quot;1&quot;;&amp;#10;    prac_left_button = left_button;&amp;#10;    right_button = &quot;2&quot;;&amp;#10;    prac_right_button = right_button;&amp;#10;} else {&amp;#10;    left_button = &quot;1&quot;;&amp;#10;    prac_left_button = left_button;&amp;#10;    right_button = &quot;2&quot;;&amp;#10;    prac_right_button = right_button;&amp;#10;}&amp;#10;button_list = [left_button, right_button];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="#TODO change as needed by scanner site.&amp;#10;#define left and right button for right handed people&amp;#10;if expInfo[&quot;handedness&quot;] == &quot;right&quot;:&amp;#10;    left_button = '1' #vars must be in single quotes&amp;#10;    prac_left_button = left_button&amp;#10;    right_button = '2'&amp;#10;    prac_right_button = right_button&amp;#10;#define left and right button for right handed people&amp;#10;else:&amp;#10;    left_button = '1'&amp;#10;    prac_left_button = left_button&amp;#10;    right_button = '2'&amp;#10;    prac_right_button = right_button&amp;#10;    &amp;#10;#make a list for allowed key presses in cue routine&amp;#10;button_list = [left_button, right_button]&amp;#10;&amp;#10;#are we doing practice? &amp;#10;practice_num = 0&amp;#10;if expInfo[&quot;practice&quot;] == &quot;yes&quot;:&amp;#10;    practice_num = 1&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="if ((expInfo[&quot;handedness&quot;] === &quot;right&quot;)) {&amp;#10;    left_button = &quot;1&quot;;&amp;#10;    prac_left_button = left_button;&amp;#10;    right_button = &quot;2&quot;;&amp;#10;    prac_right_button = right_button;&amp;#10;} else {&amp;#10;    left_button = &quot;1&quot;;&amp;#10;    prac_left_button = left_button;&amp;#10;    right_button = &quot;2&quot;;&amp;#10;    prac_right_button = right_button;&amp;#10;}&amp;#10;button_list = [left_button, right_button];&amp;#10;practice_num = 0;&amp;#10;if ((expInfo[&quot;practice&quot;] === &quot;yes&quot;)) {&amp;#10;    practice_num = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -1377,7 +1377,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="button_box_code" valType="code" updates="None" name="name"/>
+        <Param val="button_box_and_practice_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
   </Routines>
@@ -1390,7 +1390,7 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
-      <Param name="nReps" updates="None" val="expInfo[&quot;practice&quot;]" valType="num"/>
+      <Param name="nReps" updates="None" val="practice_num" valType="num"/>
       <Param name="name" updates="None" val="practice_loop" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>

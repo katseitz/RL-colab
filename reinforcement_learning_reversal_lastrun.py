@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Thu Mar 20 09:52:13 2025
+    on Sat Mar 22 19:28:14 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -50,7 +50,7 @@ expName = 'RL_reversal'  # from the Builder filename that created this script
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
     'handedness': ["right", "left"],
-    'practice': [0,1],
+    'practice': ["no","yes"],
     'restart_from_run': [None, 2,3],
     'date|hid': data.getDateStr(),
     'expName|hid': expName,
@@ -425,7 +425,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         languageStyle='LTR',
         depth=0.0);
     advance_press_pd = keyboard.Keyboard(deviceName='advance_press_pd')
-    # Run 'Begin Experiment' code from button_box_code
+    # Run 'Begin Experiment' code from button_box_and_practice_code
     #TODO change as needed by scanner site.
     #define left and right button for right handed people
     if expInfo["handedness"] == "right":
@@ -442,6 +442,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
     #make a list for allowed key presses in cue routine
     button_list = [left_button, right_button]
+    
+    #are we doing practice? 
+    practice_num = 0
+    if expInfo["practice"] == "yes":
+        practice_num = 1
+    
     
     # --- Initialize components for Routine "prac_left" ---
     left_box_lp = visual.ImageStim(
@@ -541,9 +547,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=0.0);
     # Run 'Begin Experiment' code from define_switches_code
     #number correct for the switch occurs
-    num_switch_list = [7, 8, 9, 10, 11, 12, 13, 14, 15]
-    #now shuffle the list
-    random.shuffle(num_switch_list)
+    numbers_1 = [7, 8, 9, 10, 11, 12, 13, 14, 15]
+    numbers_2 = [7, 8, 9, 10, 11, 12, 13, 14, 15]
+    #now shuffle the lists
+    random.shuffle(numbers_1)
+    random.shuffle(numbers_2)
+    num_switch_list = numbers_1 + numbers_2
+    
+    print(num_switch_list)
+    
+    
     # Run 'Begin Experiment' code from probability_sequence_code
     sequence = []
     exp_correct = 0 #number of correct choices made in the experiment
@@ -881,7 +894,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     practice_loop = data.TrialHandler2(
         name='practice_loop',
-        nReps=expInfo["practice"], 
+        nReps=practice_num, 
         method='random', 
         extraInfo=expInfo, 
         originPath=-1, 
@@ -1664,7 +1677,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             routineTimer.addTime(-2.500000)
         thisExp.nextEntry()
         
-    # completed expInfo["practice"] repeats of 'practice_loop'
+    # completed practice_num repeats of 'practice_loop'
     
     if thisSession is not None:
         # if running in a Session with a Liaison client, send data up to now
