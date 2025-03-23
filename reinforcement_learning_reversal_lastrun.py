@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Sat Mar 22 19:28:14 2025
+    on Sun Mar 23 18:05:42 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -547,14 +547,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=0.0);
     # Run 'Begin Experiment' code from define_switches_code
     #number correct for the switch occurs
+    #we need two lists because of the restart at random
     numbers_1 = [7, 8, 9, 10, 11, 12, 13, 14, 15]
     numbers_2 = [7, 8, 9, 10, 11, 12, 13, 14, 15]
     #now shuffle the lists
     random.shuffle(numbers_1)
     random.shuffle(numbers_2)
+    #concat to make the list
     num_switch_list = numbers_1 + numbers_2
     
-    print(num_switch_list)
     
     
     # Run 'Begin Experiment' code from probability_sequence_code
