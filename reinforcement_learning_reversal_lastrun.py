@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Sun Mar 23 18:05:42 2025
+    on Sun Mar 23 19:31:26 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -418,7 +418,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "prac_dir" ---
     welcome_text = visual.TextStim(win=win, name='welcome_text',
-        text='In this game, your job is collect as many gold coins as possible. \n\nThere will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress the space bar to continue.',
+        text='',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -433,12 +433,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         prac_left_button = left_button
         right_button = '2'
         prac_right_button = right_button
+        instruc = "In this game, your job is collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress the space bar to continue."
     #define left and right button for right handed people
     else:
         left_button = '1'
         prac_left_button = left_button
         right_button = '2'
         prac_right_button = right_button
+        instruc = "In this game, your job is collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your middle finger to choose the box on the left, and press the button with your pointer finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress the space bar to continue."
         
     #make a list for allowed key presses in cue routine
     button_list = [left_button, right_button]
@@ -760,6 +762,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     prac_dir.status = NOT_STARTED
     continueRoutine = True
     # update component parameters for each repeat
+    welcome_text.setText(instruc)
     # create starting attributes for advance_press_pd
     advance_press_pd.keys = []
     advance_press_pd.rt = []
@@ -1886,7 +1889,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         #start at a new magic num for runs 2, 3
         if runs.thisN != 0 and num_rewarded != 0:
             num_switch = num_switch + 1
-            print(num_switch)
         
         
         num_rewarded = 0 #start fresh for each run
@@ -2495,7 +2497,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             #a gold coin
             
             if(num_rewarded == 0 and sequence[exp_correct] == 0 and ((cue_resp.keys == left_button and good_side == "left") or (cue_resp.keys == right_button and good_side == "right"))):
-                print("trying to switch")
                 sequence[exp_correct] = 1
                 #double check this logic:
                 next_1 = sequence.index(1, exp_correct + 1)
@@ -2564,8 +2565,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 remaining_t = 1.5 - cue_resp.rt
                 leftover_t = leftover_t + remaining_t
                 #select right or left
-                print(cue_resp.keys )
-                print(left_button)
                 if cue_resp.keys == left_button: 
                     print("trying to select")
                     position = (-0.3, -0.15)
@@ -3191,7 +3190,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         leftover_time_break.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        fixation_end.setText('Take a short break for  ' + str(leftover_t) + ' seconds!!')
+        fixation_end.setText('Take a short break.')
         # store start times for leftover_time_break
         leftover_time_break.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         leftover_time_break.tStart = globalClock.getTime(format='float')
