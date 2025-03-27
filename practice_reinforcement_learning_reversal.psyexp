@@ -920,6 +920,23 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
+      <CodeComponent name="hand_code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="if expInfo[&quot;handedness&quot;] == &quot;right&quot;:&amp;#10;    left_button = &quot;j&quot;&amp;#10;    right_button = &quot;k&quot;&amp;#10;else:&amp;#10;    left_button = &quot;d&quot;&amp;#10;    right_button = &quot;f&quot;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="if ((expInfo[&quot;handedness&quot;] === &quot;right&quot;)) {&amp;#10;    left_button = &quot;j&quot;;&amp;#10;    right_button = &quot;k&quot;;&amp;#10;} else {&amp;#10;    left_button = &quot;d&quot;;&amp;#10;    right_button = &quot;f&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="hand_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="first_box">
       <RoutineSettingsComponent name="first_box" plugin="None">
