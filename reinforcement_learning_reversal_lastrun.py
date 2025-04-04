@@ -433,15 +433,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         prac_left_button = left_button
         right_button = '2'
         prac_right_button = right_button
-        instruc = "In this game, your job is collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress the space bar to continue."
+        instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
+        pointer = left_button
     #define left and right button for right handed people
     else:
         left_button = '1'
         prac_left_button = left_button
         right_button = '2'
         prac_right_button = right_button
-        instruc = "In this game, your job is collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your middle finger to choose the box on the left, and press the button with your pointer finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress the space bar to continue."
-        
+        instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your middle finger to choose the box on the left, and press the button with your pointer finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
+        pointer = right_button
     #make a list for allowed key presses in cue routine
     button_list = [left_button, right_button]
     
@@ -541,7 +542,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "summary_instructions" ---
     summary_text = visual.TextStim(win=win, name='summary_text',
-        text='1. In the game, there will be two boxes, but only one is magical.\n\n2. Sometimes, the magical box switches sides!\n\n3. Sometimes, even the magical box does not have a coin.\n\n\nTry to collect all the coins!\n\nPress the space bar to continue.',
+        text='1. In the game, there will be two boxes, but only one is magical.\n\n2. Sometimes, the magical box switches sides!\n\n3. Sometimes, even the magical box does not have a coin.\n\n\nTry to collect all the coins!\n\nPress with your pointer finger to continue.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -596,7 +597,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "get_ready" ---
     get_ready_text = visual.TextStim(win=win, name='get_ready_text',
-        text='Get Ready!\n\nPress the space bar to continue.',
+        text='Get Ready!',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -767,6 +768,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     advance_press_pd.keys = []
     advance_press_pd.rt = []
     _advance_press_pd_allKeys = []
+    # allowedKeys looks like a variable, so make sure it exists locally
+    if 'pointer' in globals():
+        pointer = globals()['pointer']
     # store start times for prac_dir
     prac_dir.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     prac_dir.tStart = globalClock.getTime(format='float')
@@ -831,12 +835,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             thisExp.timestampOnFlip(win, 'advance_press_pd.started')
             # update status
             advance_press_pd.status = STARTED
+            # allowed keys looks like a variable named `pointer`
+            if not type(pointer) in [list, tuple, np.ndarray]:
+                if not isinstance(pointer, str):
+                    pointer = str(pointer)
+                elif not ',' in pointer:
+                    pointer = (pointer,)
+                else:
+                    pointer = eval(pointer)
             # keyboard checking is just starting
             waitOnFlip = True
             win.callOnFlip(advance_press_pd.clock.reset)  # t=0 on next screen flip
             win.callOnFlip(advance_press_pd.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if advance_press_pd.status == STARTED and not waitOnFlip:
-            theseKeys = advance_press_pd.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+            theseKeys = advance_press_pd.getKeys(keyList=list(pointer), ignoreKeys=["escape"], waitRelease=False)
             _advance_press_pd_allKeys.extend(theseKeys)
             if len(_advance_press_pd_allKeys):
                 advance_press_pd.keys = _advance_press_pd_allKeys[-1].name  # just the last key pressed
@@ -1702,6 +1714,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     advance_to_runs.keys = []
     advance_to_runs.rt = []
     _advance_to_runs_allKeys = []
+    # allowedKeys looks like a variable, so make sure it exists locally
+    if 'pointer' in globals():
+        pointer = globals()['pointer']
     # store start times for summary_instructions
     summary_instructions.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     summary_instructions.tStart = globalClock.getTime(format='float')
@@ -1766,12 +1781,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             thisExp.timestampOnFlip(win, 'advance_to_runs.started')
             # update status
             advance_to_runs.status = STARTED
+            # allowed keys looks like a variable named `pointer`
+            if not type(pointer) in [list, tuple, np.ndarray]:
+                if not isinstance(pointer, str):
+                    pointer = str(pointer)
+                elif not ',' in pointer:
+                    pointer = (pointer,)
+                else:
+                    pointer = eval(pointer)
             # keyboard checking is just starting
             waitOnFlip = True
             win.callOnFlip(advance_to_runs.clock.reset)  # t=0 on next screen flip
             win.callOnFlip(advance_to_runs.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if advance_to_runs.status == STARTED and not waitOnFlip:
-            theseKeys = advance_to_runs.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+            theseKeys = advance_to_runs.getKeys(keyList=list(pointer), ignoreKeys=["escape"], waitRelease=False)
             _advance_to_runs_allKeys.extend(theseKeys)
             if len(_advance_to_runs_allKeys):
                 advance_to_runs.keys = _advance_to_runs_allKeys[-1].name  # just the last key pressed
