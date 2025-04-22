@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Wed Apr  9 08:22:52 2025
+    on Tue Apr 22 09:57:19 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -45,7 +45,7 @@ deviceManager = hardware.DeviceManager()
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
 psychopyVersion = '2024.2.4'
-expName = 'RL_reversal'  # from the Builder filename that created this script
+expName = 'RL_in-scanner'  # from the Builder filename that created this script
 # information about this experiment
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
@@ -133,7 +133,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/katharinaseitz/Documents/projects/RL-colab/reinforcement_learning_reversal_lastrun.py',
+        originPath='/Users/akashrathi/Documents/RL-colab/RL_in-scanner_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -433,7 +433,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         prac_left_button = left_button
         right_button = '2'
         prac_right_button = right_button
-        instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
+        instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a frame will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
         pointer = left_button
         left_prac_text = "Practice selecting the left box by pressing with your pointer finger."
         right_prac_text = "Practice selecting the right box by pressing with your middle finger."
@@ -443,7 +443,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         prac_left_button = left_button
         right_button = '2'
         prac_right_button = right_button
-        instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your middle finger to choose the box on the left, and press the button with your pointer finger to choose the box on the right.\n\nOnce you choose, a box will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
+        instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your middle finger to choose the box on the left, and press the button with your pointer finger to choose the box on the right.\n\nOnce you choose, a frame will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
         pointer = right_button
         left_prac_text = "Practice selecting the left box by pressing with your middle finger."
         right_prac_text = "Practice selecting the right box by pressing with your pointer finger."
