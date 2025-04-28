@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Tue Apr 22 10:15:43 2025
+    on Mon Apr 28 07:48:26 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -135,7 +135,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/akashrathi/Documents/RL-colab/RL_practice_lastrun.py',
+        originPath='/Users/katharinaseitz/Documents/projects/RL-colab/RL_practice_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -565,7 +565,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     fix_text = visual.TextStim(win=win, name='fix_text',
         text='+',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -639,7 +639,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     fix_text = visual.TextStim(win=win, name='fix_text',
         text='+',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -663,7 +663,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     
     #TODO: pull this from experiment variables.
-    number_of_trials = 150
+    number_of_trials = 20
     
     while len(sequence) < number_of_trials:
         #generate a probabilty list at 75p by alternating
@@ -676,9 +676,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         #TODO: output this sequence to a .csv that gets saved.
     
     
-    with open('test.csv', 'w', newline='') as myfile:
-         wr = csv.writer(myfile)
-         wr.writerow(sequence)
+    #with open('test.csv', 'w', newline='') as myfile:
+    #     wr = csv.writer(myfile)
+    #     wr.writerow(sequence)
     # Run 'Begin Experiment' code from iti_code
     #read in ISI and ITI jitters
     jitters = pd.read_csv('rl_reversal_jitters.csv')
@@ -1722,7 +1722,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if isinstance(find_magic_box_loop, data.TrialHandler2) and thisFind_magic_box_loop.thisN != find_magic_box_loop.thisTrial.thisN:
                 continueRoutine = False
             prac_both_selec.forceEnded = routineForceEnded = not continueRoutine
-            while continueRoutine and routineTimer.getTime() < 2.5:
+            while continueRoutine and routineTimer.getTime() < 1.5:
                 # get current time
                 t = routineTimer.getTime()
                 tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1757,7 +1757,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if left_box_lr is stopping this frame...
                 if left_box_lr.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > left_box_lr.tStartRefresh + 2.5-frameTolerance:
+                    if tThisFlipGlobal > left_box_lr.tStartRefresh + 1.5-frameTolerance:
                         # keep track of stop time/frame for later
                         left_box_lr.tStop = t  # not accounting for scr refresh
                         left_box_lr.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1791,7 +1791,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if right_box_lr is stopping this frame...
                 if right_box_lr.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > right_box_lr.tStartRefresh + 2.5-frameTolerance:
+                    if tThisFlipGlobal > right_box_lr.tStartRefresh + 1.5-frameTolerance:
                         # keep track of stop time/frame for later
                         right_box_lr.tStop = t  # not accounting for scr refresh
                         right_box_lr.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1850,7 +1850,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             elif prac_both_selec.forceEnded:
                 routineTimer.reset()
             else:
-                routineTimer.addTime(-2.500000)
+                routineTimer.addTime(-1.500000)
             
             # --- Prepare to start Routine "prac_both_out" ---
             # create an object to store info about Routine prac_both_out
@@ -2021,7 +2021,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             continueRoutine = True
             # update component parameters for each repeat
             # Run 'Begin Routine' code from fix_dur_code
-            fix_dur = random.choice([.5, 1, 3])
+            fix_dur = random.choice([1, 1.5, 2, 2.5, 3])
             # store start times for fix_both
             fix_both.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
             fix_both.tStart = globalClock.getTime(format='float')
@@ -2570,7 +2570,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if isinstance(switch_side_loop, data.TrialHandler2) and thisSwitch_side_loop.thisN != switch_side_loop.thisTrial.thisN:
             continueRoutine = False
         switch_select.forceEnded = routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 2.5:
+        while continueRoutine and routineTimer.getTime() < 1.5:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -2601,7 +2601,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if left_switch_selec is stopping this frame...
             if left_switch_selec.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > left_switch_selec.tStartRefresh + 2.5-frameTolerance:
+                if tThisFlipGlobal > left_switch_selec.tStartRefresh + 1.5-frameTolerance:
                     # keep track of stop time/frame for later
                     left_switch_selec.tStop = t  # not accounting for scr refresh
                     left_switch_selec.tStopRefresh = tThisFlipGlobal  # on global time
@@ -2635,7 +2635,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if right_switch_selec is stopping this frame...
             if right_switch_selec.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > right_switch_selec.tStartRefresh + 2.5-frameTolerance:
+                if tThisFlipGlobal > right_switch_selec.tStartRefresh + 1.5-frameTolerance:
                     # keep track of stop time/frame for later
                     right_switch_selec.tStop = t  # not accounting for scr refresh
                     right_switch_selec.tStopRefresh = tThisFlipGlobal  # on global time
@@ -2698,7 +2698,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         elif switch_select.forceEnded:
             routineTimer.reset()
         else:
-            routineTimer.addTime(-2.500000)
+            routineTimer.addTime(-1.500000)
         
         # --- Prepare to start Routine "switch_out" ---
         # create an object to store info about Routine switch_out
@@ -2869,7 +2869,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from fix_dur_code
-        fix_dur = random.choice([.5, 1, 3])
+        fix_dur = random.choice([1, 1.5, 2, 2.5, 3])
         # store start times for fix_both
         fix_both.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         fix_both.tStart = globalClock.getTime(format='float')
