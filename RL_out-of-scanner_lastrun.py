@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Mon Apr 28 07:30:48 2025
+    on Mon Apr 28 10:57:05 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -10,6 +10,10 @@ If you publish work using this script the most relevant publication is:
         https://doi.org/10.3758/s13428-018-01193-y
 
 """
+
+import psychopy
+psychopy.useVersion('2024.2.4')
+
 
 # --- Import packages ---
 from psychopy import locale_setup
@@ -584,9 +588,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         #TODO: output this sequence to a .csv that gets saved.
     
     
-    with open('test.csv', 'w', newline='') as myfile:
-         wr = csv.writer(myfile)
-         wr.writerow(sequence)
+    #with open('test.csv', 'w', newline='') as myfile:
+    #     wr = csv.writer(myfile)
+    #     wr.writerow(sequence)
     advance_to_runs = keyboard.Keyboard(deviceName='advance_to_runs')
     # Run 'Begin Experiment' code from restart_mid_and_iti_code
     if expInfo["restart_from_run"]:
