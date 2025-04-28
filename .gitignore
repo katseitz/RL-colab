@@ -1,7 +1,6 @@
 # ignore all data files
 *.log
 *.psydat
-*.csv
 data/
 .DS_Store
 test.csv
