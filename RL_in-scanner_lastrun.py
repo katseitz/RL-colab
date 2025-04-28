@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Tue Apr 22 09:57:19 2025
+    on Mon Apr 28 07:36:19 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -133,7 +133,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/akashrathi/Documents/RL-colab/RL_in-scanner_lastrun.py',
+        originPath='/Users/katharinaseitz/Documents/projects/RL-colab/RL_in-scanner_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -584,9 +584,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         #TODO: output this sequence to a .csv that gets saved.
     
     
-    with open('test.csv', 'w', newline='') as myfile:
-         wr = csv.writer(myfile)
-         wr.writerow(sequence)
+    #with open('test.csv', 'w', newline='') as myfile:
+    #     wr = csv.writer(myfile)
+    #     wr.writerow(sequence)
     advance_to_runs = keyboard.Keyboard(deviceName='advance_to_runs')
     # Run 'Begin Experiment' code from restart_mid_and_iti_code
     if expInfo["restart_from_run"]:
