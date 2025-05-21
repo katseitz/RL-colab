@@ -10,7 +10,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: peter-evans/auto-approve-action@v2
+      - uses: peter-evans/auto-approve-action@v2.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           allow-edited-pulls: true
