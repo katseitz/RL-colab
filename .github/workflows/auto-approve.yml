@@ -1,1 +1,17 @@
+name: Auto-approve my own PRs
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  self-approve:
+    runs-on: ubuntu-latest
+    if: github.actor == 'katseitz'
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: peter-evans/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-edited-pulls: true
 
