@@ -7,7 +7,7 @@ permissions:
   pull-requests: write
 jobs:
   self-approve:
-    if: github.actor == 'YOUR_GITHUB_USERNAME'
+    if: github.actor == 'katseitz'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
