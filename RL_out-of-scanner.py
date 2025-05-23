@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Fri May 23 12:31:55 2025
+    on Fri May 23 12:28:54 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -137,7 +137,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/akashrathi/Desktop/RL_github_clones/RL-colab/RL_out-of-scanner_lastrun.py',
+        originPath='/Users/akashrathi/Desktop/RL_github_clones/RL-colab/RL_out-of-scanner.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -300,12 +300,6 @@ def setupDevices(expInfo, thisExp, win):
         advance_press = deviceManager.addDevice(
             deviceClass='keyboard',
             deviceName='advance_press',
-        )
-    if deviceManager.getDevice('trigger_value') is None:
-        # initialise trigger_value
-        trigger_value = deviceManager.addDevice(
-            deviceClass='keyboard',
-            deviceName='trigger_value',
         )
     if deviceManager.getDevice('cue_resp') is None:
         # initialise cue_resp
@@ -612,16 +606,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         languageStyle='LTR',
         depth=0.0);
     advance_press = keyboard.Keyboard(deviceName='advance_press')
-    
-    # --- Initialize components for Routine "scanner_trigger" ---
-    scanner_text = visual.TextStim(win=win, name='scanner_text',
-        text='Please press the space bar with your free hand to start the task.',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=0.0);
-    trigger_value = keyboard.Keyboard(deviceName='trigger_value')
     
     # --- Initialize components for Routine "cue" ---
     left_box = visual.ImageStim(
@@ -2055,154 +2039,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             runs.addData('advance_press.rt', advance_press.rt)
             runs.addData('advance_press.duration', advance_press.duration)
         # the Routine "get_ready" was not non-slip safe, so reset the non-slip timer
-        routineTimer.reset()
-        
-        # --- Prepare to start Routine "scanner_trigger" ---
-        # create an object to store info about Routine scanner_trigger
-        scanner_trigger = data.Routine(
-            name='scanner_trigger',
-            components=[scanner_text, trigger_value],
-        )
-        scanner_trigger.status = NOT_STARTED
-        continueRoutine = True
-        # update component parameters for each repeat
-        # create starting attributes for trigger_value
-        trigger_value.keys = []
-        trigger_value.rt = []
-        _trigger_value_allKeys = []
-        # Run 'Begin Routine' code from trigger_code
-        waitForScannerClock = core.Clock()
-        fmriClock = core.Clock()
-        # store start times for scanner_trigger
-        scanner_trigger.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-        scanner_trigger.tStart = globalClock.getTime(format='float')
-        scanner_trigger.status = STARTED
-        thisExp.addData('scanner_trigger.started', scanner_trigger.tStart)
-        scanner_trigger.maxDuration = None
-        # keep track of which components have finished
-        scanner_triggerComponents = scanner_trigger.components
-        for thisComponent in scanner_trigger.components:
-            thisComponent.tStart = None
-            thisComponent.tStop = None
-            thisComponent.tStartRefresh = None
-            thisComponent.tStopRefresh = None
-            if hasattr(thisComponent, 'status'):
-                thisComponent.status = NOT_STARTED
-        # reset timers
-        t = 0
-        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-        frameN = -1
-        
-        # --- Run Routine "scanner_trigger" ---
-        # if trial has changed, end Routine now
-        if isinstance(runs, data.TrialHandler2) and thisRun.thisN != runs.thisTrial.thisN:
-            continueRoutine = False
-        scanner_trigger.forceEnded = routineForceEnded = not continueRoutine
-        while continueRoutine:
-            # get current time
-            t = routineTimer.getTime()
-            tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-            # update/draw components on each frame
-            
-            # *scanner_text* updates
-            
-            # if scanner_text is starting this frame...
-            if scanner_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                scanner_text.frameNStart = frameN  # exact frame index
-                scanner_text.tStart = t  # local t and not account for scr refresh
-                scanner_text.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(scanner_text, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'scanner_text.started')
-                # update status
-                scanner_text.status = STARTED
-                scanner_text.setAutoDraw(True)
-            
-            # if scanner_text is active this frame...
-            if scanner_text.status == STARTED:
-                # update params
-                pass
-            
-            # *trigger_value* updates
-            waitOnFlip = False
-            
-            # if trigger_value is starting this frame...
-            if trigger_value.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                trigger_value.frameNStart = frameN  # exact frame index
-                trigger_value.tStart = t  # local t and not account for scr refresh
-                trigger_value.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(trigger_value, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'trigger_value.started')
-                # update status
-                trigger_value.status = STARTED
-                # keyboard checking is just starting
-                waitOnFlip = True
-                win.callOnFlip(trigger_value.clock.reset)  # t=0 on next screen flip
-                win.callOnFlip(trigger_value.clearEvents, eventType='keyboard')  # clear events on next screen flip
-            if trigger_value.status == STARTED and not waitOnFlip:
-                theseKeys = trigger_value.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
-                _trigger_value_allKeys.extend(theseKeys)
-                if len(_trigger_value_allKeys):
-                    trigger_value.keys = _trigger_value_allKeys[-1].name  # just the last key pressed
-                    trigger_value.rt = _trigger_value_allKeys[-1].rt
-                    trigger_value.duration = _trigger_value_allKeys[-1].duration
-                    # a response ends the routine
-                    continueRoutine = False
-            
-            # check for quit (typically the Esc key)
-            if defaultKeyboard.getKeys(keyList=["escape"]):
-                thisExp.status = FINISHED
-            if thisExp.status == FINISHED or endExpNow:
-                endExperiment(thisExp, win=win)
-                return
-            # pause experiment here if requested
-            if thisExp.status == PAUSED:
-                pauseExperiment(
-                    thisExp=thisExp, 
-                    win=win, 
-                    timers=[routineTimer], 
-                    playbackComponents=[]
-                )
-                # skip the frame we paused on
-                continue
-            
-            # check if all components have finished
-            if not continueRoutine:  # a component has requested a forced-end of Routine
-                scanner_trigger.forceEnded = routineForceEnded = True
-                break
-            continueRoutine = False  # will revert to True if at least one component still running
-            for thisComponent in scanner_trigger.components:
-                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                    continueRoutine = True
-                    break  # at least one component has not yet finished
-            
-            # refresh the screen
-            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-                win.flip()
-        
-        # --- Ending Routine "scanner_trigger" ---
-        for thisComponent in scanner_trigger.components:
-            if hasattr(thisComponent, "setAutoDraw"):
-                thisComponent.setAutoDraw(False)
-        # store stop times for scanner_trigger
-        scanner_trigger.tStop = globalClock.getTime(format='float')
-        scanner_trigger.tStopRefresh = tThisFlipGlobal
-        thisExp.addData('scanner_trigger.stopped', scanner_trigger.tStop)
-        # check responses
-        if trigger_value.keys in ['', [], None]:  # No response was made
-            trigger_value.keys = None
-        runs.addData('trigger_value.keys',trigger_value.keys)
-        if trigger_value.keys != None:  # we had a response
-            runs.addData('trigger_value.rt', trigger_value.rt)
-            runs.addData('trigger_value.duration', trigger_value.duration)
-        # Run 'End Routine' code from trigger_code
-        fmriClock.reset()
-        # the Routine "scanner_trigger" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
         # set up handler to look after randomisation of conditions etc
