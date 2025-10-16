@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Mon Apr 28 07:36:19 2025
+    on Thu Oct 16 09:31:34 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -133,7 +133,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/katharinaseitz/Documents/projects/RL-colab/RL_in-scanner_lastrun.py',
+        originPath='/Users/akashrathi/Documents/GithubClones/RL-colab/RL_in-scanner_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -429,9 +429,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     #TODO change as needed by scanner site.
     #define left and right button for right handed people
     if expInfo["handedness"] == "right":
-        left_button = '1' #vars must be in single quotes
+        left_button = 'b' #vars must be in single quotes
         prac_left_button = left_button
-        right_button = '2'
+        right_button = 'y'
         prac_right_button = right_button
         instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a frame will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
         pointer = left_button
@@ -439,9 +439,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         right_prac_text = "Practice selecting the right box by pressing with your middle finger."
     #define left and right button for right handed people
     else:
-        left_button = '1'
+        left_button = 'b'
         prac_left_button = left_button
-        right_button = '2'
+        right_button = 'y'
         prac_right_button = right_button
         instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your middle finger to choose the box on the left, and press the button with your pointer finger to choose the box on the right.\n\nOnce you choose, a frame will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
         pointer = right_button
@@ -601,7 +601,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "get_ready" ---
     get_ready_text = visual.TextStim(win=win, name='get_ready_text',
-        text='Get Ready!',
+        text='Get Ready! The experimenter will start the game momentarily.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -2141,7 +2141,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 win.callOnFlip(trigger_value.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(trigger_value.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if trigger_value.status == STARTED and not waitOnFlip:
-                theseKeys = trigger_value.getKeys(keyList=['5'], ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = trigger_value.getKeys(keyList=['t'], ignoreKeys=["escape"], waitRelease=False)
                 _trigger_value_allKeys.extend(theseKeys)
                 if len(_trigger_value_allKeys):
                     trigger_value.keys = _trigger_value_allKeys[-1].name  # just the last key pressed
