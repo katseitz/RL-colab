@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2025.1.1">
+<PsychoPy2experiment encoding="utf-8" version="2024.2.4">
   <Settings>
     <Param val="3" valType="str" updates="None" name="Audio latency priority"/>
     <Param val="ptb" valType="str" updates="None" name="Audio lib"/>
@@ -26,7 +26,7 @@
     <Param val="False" valType="bool" updates="None" name="Show mouse"/>
     <Param val="height" valType="str" updates="None" name="Units"/>
     <Param val="" valType="str" updates="None" name="Use version"/>
-    <Param val="[2240, 1260]" valType="list" updates="None" name="Window size (pixels)"/>
+    <Param val="[1728, 1117]" valType="list" updates="None" name="Window size (pixels)"/>
     <Param val="none" valType="str" updates="None" name="backgroundFit"/>
     <Param val="" valType="str" updates="None" name="backgroundImg"/>
     <Param val="avg" valType="str" updates="None" name="blendMode"/>
@@ -165,7 +165,7 @@
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="cue_resp" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="release" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -202,7 +202,7 @@
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="all_keys" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="release" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -682,7 +682,7 @@
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="advance_to_runs" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="release" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -951,7 +951,7 @@
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="cue_resp_lp" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="release" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -1167,7 +1167,7 @@
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="cue_resp_rp" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="release" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -1352,7 +1352,7 @@
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="advance_press_pd" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="release" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
