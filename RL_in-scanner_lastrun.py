@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Thu Oct  2 10:54:23 2025
+    on Wed Apr 15 11:39:50 2026
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -67,7 +67,7 @@ or run the experiment with `--pilot` as an argument. To change what pilot
 PILOTING = core.setPilotModeFromArgs()
 # start off with values from experiment settings
 _fullScr = True
-_winSize = [1728, 1117]
+_winSize = [1920, 1080]
 # if in pilot mode, apply overrides according to preferences
 if PILOTING:
     # force windowed mode
@@ -133,7 +133,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/akashrathi/Documents/GithubClones/RL-colab/RL_in-scanner_lastrun.py',
+        originPath='/Users/akashrathi/Documents/BD2_Tasks/RL-colab/RL_in-scanner_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -420,7 +420,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     welcome_text = visual.TextStim(win=win, name='welcome_text',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.04, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -429,9 +429,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     #TODO change as needed by scanner site.
     #define left and right button for right handed people
     if expInfo["handedness"] == "right":
-        left_button = '6' #vars must be in single quotes
+        left_button = '0' #vars must be in single quotes
         prac_left_button = left_button
-        right_button = '7'
+        right_button = '1'
         prac_right_button = right_button
         instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your pointer finger to choose the box on the left, and press the button with your middle finger to choose the box on the right.\n\nOnce you choose, a frame will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
         pointer = left_button
@@ -439,9 +439,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         right_prac_text = "Practice selecting the right box by pressing with your middle finger."
     #define left and right button for right handed people
     else:
-        left_button = '2'
+        left_button = '0'
         prac_left_button = left_button
-        right_button = '3'
+        right_button = '1'
         prac_right_button = right_button
         instruc = "In this game, your job is to collect as many gold coins as possible. \n\n There will be two boxes on the screen, one on the left and one on the right. Press the button with your middle finger to choose the box on the left, and press the button with your pointer finger to choose the box on the right.\n\nOnce you choose, a frame will show up on the screen. If you choose too late, your choice will not count.\n\nAfter you make a choice, you will get feedback telling you if the box had a coin in it.\n\nPress with your pointer finger to continue."
         pointer = right_button
