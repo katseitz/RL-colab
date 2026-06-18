@@ -515,10 +515,10 @@
       <CodeComponent name="save_output" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="thisExp.saveAsWideText(filename + '_backup.csv', delim='auto')&amp;#10;thisExp.saveAsPickle(filename)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="psychoJS.experiment.saveAsWideText((filename + &quot;_backup.csv&quot;), {&quot;delim&quot;: &quot;auto&quot;});&amp;#10;psychoJS.experiment.saveAsPickle(filename);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="psychoJS.experiment.saveAsWideText((filename + &quot;_backup.csv&quot;), {&quot;delim&quot;: &quot;auto&quot;});&amp;#10;psychoJS.experiment.saveAsPickle(filename);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="thisExp.saveAsWideText(filename + '_backup.csv', delim='auto')&amp;#10;thisExp.saveAsPickle(filename)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>

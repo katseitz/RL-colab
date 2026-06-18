@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2025.1.1),
-    on Thu Jun 18 10:54:54 2026
+    on Thu Jun 18 11:02:55 2026
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -736,9 +736,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    # Run 'Begin Experiment' code from save_output
-    thisExp.saveAsWideText(filename + '_backup.csv', delim='auto')
-    thisExp.saveAsPickle(filename)
     
     # --- Initialize components for Routine "leftover_time_break" ---
     fixation_end = visual.TextStim(win=win, name='fixation_end',
@@ -3154,6 +3151,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         coins_won_text.setText('Congratulations, you collected ' + str(num_gold_coins) + ' gold coins!!')
+        # Run 'Begin Routine' code from save_output
+        thisExp.saveAsWideText(filename + '_backup.csv', delim='auto')
+        thisExp.saveAsPickle(filename)
         # store start times for run_feedback
         run_feedback.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         run_feedback.tStart = globalClock.getTime(format='float')
